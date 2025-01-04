@@ -1,0 +1,81 @@
+﻿@{
+
+    var KnowledgeBaseFileList = ViewBag.KnowledgeBaseFileList as List<KnowledgeBaseFileInfo>;
+
+    var PreviewHost = ViewBag.PreviewHost as string;
+}
+
+@section Css
+{
+    <style>
+        .layui-form-label {
+            width: 120px;
+        }
+    </style>
+}
+
+<div class="layui-row">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <form class="layui-form dropzone" id="file-upload-form" action="">
+                <input type="hidden" id="KnowledgeBaseID" name="KnowledgeBaseID" value="@ViewBag.KnowledgeBaseID" />
+
+                <input type="file" name="file" class="KB_files" />
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Js
+{
+    <script src="/plugs/dropzone/dropzone.min.js"></script>
+    <link rel="stylesheet" href="/plugs/dropzone/dropzone.min.css" type="text/css" />
+
+    <script src="/layuiadmin/modules/xm-select.js"></script>
+    <script>
+        layui.use(function () {
+            var form = layui.form,
+                layer = layui.layer;
+            form.render();
+            $('.KB_files').hide();
+            var KnowledgeBaseID = $('#KnowledgeBaseID').val();
+
+            Dropzone.autoDiscover = false; 
+            $("#file-upload-form").dropzone({ 
+                url: '/Controls/UploadFiles/Save',
+                maxFilesize: 128, maxFiles: 1,
+                acceptedFiles: '.pdf,.doc,.docx,.xls,.xlsx,.txt',
+                init: function () {
+                    this.on("success", function (file,re) {
+                        if (re.data) {
+                            var fileCode = re.data.FileCode;
+                            $.ajax({
+                                url: '@Url.Action("AddFile")',
+                                type: 'POST',
+                                data: { fileCode: fileCode, fileName: file.name, KnowledgeBaseID: KnowledgeBaseID },
+                                success: function (rst) {
+                                    layer.closeAll();
+                                    if (rst) {
+                                        layer.msg(rst.ErrorDesc, { icon: 1 });
+                                        if (rst.Status) {
+                                            if (parent) {
+                                                parent.location.reload();
+                                            } else {
+                                                location.reload();
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    });
+                    this.on("removedfile", function (file) {
+                        console.log("File " + file.name + "removed");
+                    });
+                }
+            });
+
+        });
+    </script>
+}

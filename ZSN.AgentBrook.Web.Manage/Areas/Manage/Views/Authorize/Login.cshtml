@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "登入";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+
+    <div class="layadmin-user-login-main">
+      <div class="layadmin-user-login-box layadmin-user-login-header">
+            <h2>AgentBrook</h2>
+        <p>AI应用开发平台</p>
+      </div>
+      <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+        <div class="layui-form-item">
+          <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
+          <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="用户名" class="layui-input">
+        </div>
+        <div class="layui-form-item">
+          <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
+          <input type="password" name="password" id="LAY-user-login-password" lay-verify="required" placeholder="密码" class="layui-input">
+        </div>
+
+        <div class="layui-form-item">
+          <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
+        </div>
+        
+      </div>
+    </div>
+    
+    @section LoginFooter{
+    }
+    
+  </div>
+
+  @section Js{
+    <script src="/js/crypto-js.min.js"></script>
+    <script>
+        layui.use(function () {
+            var $ = layui.$;
+            var form = layui.form;
+            var layer = layui.layer;
+            form.render();
+
+            //提交
+            form.on('submit(LAY-user-login-submit)', function (obj) {
+                obj.field.password = CryptoJS.MD5(obj.field.password).toString();
+                $.ajax({
+                    url: '@Url.Action("doLogin")',
+                    type: 'POST',
+                    data: obj.field,
+                    success: function (rst) {
+                        if (rst) {
+                            layer.msg(rst.ErrorDesc, { icon: 1 });
+                            if (rst.Status) {
+                                location = '/Manage';
+                            }
+                        }
+                    }
+                });
+
+            });
+        });
+    </script>
+  }
+  
+  

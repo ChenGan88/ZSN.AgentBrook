@@ -1,0 +1,171 @@
+﻿@{
+    int pageIndex = ViewBag.PageIndex;
+    int pageSize = ViewBag.PageSize;
+    int pageTotal = ViewBag.PageTotal;
+    int total = ViewBag.Total;
+    string keyword = ViewBag.Keyword;
+    string pageTitle = ViewBag.PageTitle;
+    var LogMarkClassList = ViewBag.LogMarkClassList as List<LogMarkClass>;
+    var ParentId = ViewBag.ParentId;
+ 
+ 
+ } 
+
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>   @pageTitle </legend>
+</fieldset>
+<div class="layui-row layui-form">
+    <button class="layui-btn add_bt" style="margin-right:50px;" ><i class="layui-icon"></i>增加</button>
+    @if (ParentId > 0)
+    {
+        <button class="layui-btn" style="margin-right:50px;" onclick="history.go(-1)"><i class="layui-icon"></i>返回</button>
+    }
+
+
+    <div class="layui-input-inline" style="width: 300px;">
+        <input type="text" name="keyword" value="@keyword" class="layui-input" placeholder="搜索日志分类">
+    </div>
+    <button class="layui-btn js-result-search">搜索</button>
+</div>
+
+<div class="layui-form">
+    <table class="layui-table">
+        <colgroup>
+            <col width="42">
+            <col width="242">
+            <col width="242">
+            <col width="280">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>描述</th>
+                @*<th>创建时间</th>*@
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lc in LogMarkClassList)
+            {
+            <tr data-classid="@lc.Id">
+                <td>@lc.Id</td>
+                <td>@lc.ClassName</td>
+                <td>@lc.ClassRemarks</td>
+                @*<td>@lc.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>*@
+                <td>
+                    <button class="layui-btn layui-btn layui-btn-xs edit_bt" ><i class="layui-icon">&#xe642;</i>编辑</button>
+                    @*<button class="layui-btn-danger layui-btn layui-btn-xs" onclick="member_del(this)"><i class="layui-icon">&#xe640;</i>删除</button>*@
+                </td>
+            </tr>
+            }
+            @if (LogMarkClassList.Count == 0)
+            {
+                <tr>
+                    <td colspan="3">暂无日志类别</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div id="pageId" class="pagination"></div>
+</div>
+
+@section Js{
+    <script>
+        layui.use(function () {
+            var laypage = layui.laypage;
+            var pageIndex = @pageIndex;
+            var pageSize = @pageSize;
+            var pageTotal = @pageTotal;
+            var total = @total;
+            var keyword = encodeURIComponent('@keyword');
+            var ParentId = @ParentId;
+            var form = layui.form;
+
+            form.render();
+
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'pageId'
+                , count: total
+                , limit: pageSize
+                , curr: pageIndex
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , jump: function (obj, f) {
+                    if (f)
+                        return;
+                    location.hash = "@Url.Action("LogMarkClassList")?pageIndex=" + obj.curr + "&pageSize=" + obj.limit + "&keyword=" + keyword + "&ParentId=" + ParentId + "&appid=@HttpContextHelper.Request.GetParam("appid")";
+                }
+            });
+            /*用户-删除*/
+            function member_del(obj) {
+                layer.confirm('确认要删除吗？',
+                    function (index) {
+                        //发异步删除数据
+                        var classid = $(obj).parents("tr").data('classid');
+                        $.ajax({
+                            url: '@Url.Action("LogMarkClassDel")',
+                            type: 'POST',
+                            data: {
+                                Id: classid
+                            },
+                            success: function (res) {
+                                layer.msg('已删除!', { icon: 1, time: 1000 }, function () {
+                                    location.href = "@Url.Action("LogTypeClassList")?pageIndex=" + pageIndex + "&pageSize=" + pageSize + "&keyword=" + $('input[name="keyword"]').val() + "&ParentId=" + ParentId;
+                                });
+                            }
+                        });
+                    });
+            }
+
+            form.on('switch(status)',
+                function (data) {
+                    $.ajax({
+                        url: '@Url.Action("LogMarkClassStatus")',
+                        type: 'POST',
+                        data: {
+                            Id: $(this).parents("tr").data('classid'),
+                            status: (this.checked ? 'true' : 'false')
+                        },
+                        success: function (res) {
+                            layer.msg('已修改', { icon: 1, time: 1000 });
+                        }
+                    });
+
+                });
+
+
+            $('.js-result-search').unbind().click(function () {
+                location.href = "@Url.Action("LogMarkClassList")?pageIndex=" + 1 + "&pageSize=" + pageSize + "&keyword=" + $('input[name="keyword"]').val() + "&ParentId=" + ParentId + "&appid=@HttpContextHelper.Request.GetParam("appid")";
+            });
+
+            /*新增*/
+            $('.add_bt').click(function(){
+                var url = '@Url.Action("LogMarkClassEdit")';
+                layer.open({
+                    type: 2,
+                    title: '新增',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['100%', '100%'],
+                    content: url
+                });
+            });
+            
+
+            /*编辑*/
+            $('.edit_bt').click(function () {
+                var Id = $(this).parent().parent().data('classid');
+                var url = '@Url.Action("LogMarkClassEdit")' + '?Id=' + Id;
+                layer.open({
+                    type: 2,
+                    title: '新增',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['100%', '100%'],
+                    content: url
+                });
+            });
+        });
+    </script>
+}

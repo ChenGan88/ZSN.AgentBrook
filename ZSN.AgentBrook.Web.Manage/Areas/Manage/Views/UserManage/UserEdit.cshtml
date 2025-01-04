@@ -1,0 +1,154 @@
+﻿@{
+    var User = ViewBag.User as UserInfo;
+
+    var PreviewHost = ViewBag.PreviewHost as string;
+    var Permissions = ViewBag.Permissions as string;
+    var UserPopedomJson = ViewBag.UserPopedomJson as string;
+}
+
+@section Css
+{
+    <style>
+        .layui-form-label {
+            width: 120px;
+        }
+    </style>
+}
+
+<div class="layui-row">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <form class="layui-form">
+                <input type="hidden" name="UserID" value="@User.UserID" />
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>账号
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="UName" lay-verify="required" value="@User.UName"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>权限
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="hidden" name="PermissionCode" lay-verify="required" readonly value="@User.PermissionCode"
+                                   autocomplete="off" class="layui-input PermissionCode">
+                            <div id="UserPopedomList" class="UserPopedomList" style="overflow:scroll;"><img src="/images/loading.gif" />loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        状态
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="MState" value="0" title="正常" @(User.UState == 0 ? "checked" : "")>
+                        <input type="radio" name="MState" value="1" title="屏蔽" @(User.UState == 0 ? "" : "checked")>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <input type="hidden" name="UAppendTime" readonly lay-verify="required" placeholder="YYYY-MM-DD HH:mm" value="@User.UAppendTime.ToCurrentTime()" autocomplete="off" class="layui-input UAppendTime">
+                        <input type="hidden" name="UserID" lay-verify="required" value="@User.UserID" autocomplete="off" class="layui-input">
+                        <input type="hidden" name="UPWD" id="UPWD" value="@User.UPWD" />
+                        <button class="layui-btn save" lay-filter="save" lay-submit>保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Js
+{
+    <script src="/lib/jquery/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="/plugs/jquery.ajax-combobox/dist/jquery.ajax-combobox.css" />
+    <script src="/plugs/jquery.ajax-combobox/dist/jquery.ajax-combobox.js"></script>
+
+    <link rel="stylesheet" href="/plugs/syntax/style.css" type="text/css" cache="false">
+    <script type="text/javascript" src="/Scripts/jquery.jstree.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.hotkeys.js"></script>
+    <script>
+        layui.use(function () {
+            var form = layui.form,
+                layer = layui.layer;
+            form.render();
+
+
+            var Permissions = '@Html.Raw(Permissions)';
+            var UserPopedomJson = [@Html.Raw(UserPopedomJson)];
+
+            $("#UserPopedomList").jstree({
+
+                "json_data": { "data": [UserPopedomJson] },
+
+                "plugins": ["themes", "json_data", "ui", "crrm", "types", "hotkeys", "checkbox"]
+
+            });
+
+            function Checked_Permissions() {
+
+                if (Permissions) {
+                    var tArray = Permissions.split(',');
+                    for (var i = 0; i < tArray.length; i++) {
+                        if (tArray[i]) {
+                            $("#UserPopedomList").jstree('check_node', $('#t_' + tArray[i]));
+                        }
+                    }
+                    tArray = null;
+                }
+            }
+
+            $("#UserPopedomList").jstree('open_all');
+
+            Checked_Permissions();
+
+            layui.laydate.render({
+                elem: '.MBirthday',
+                type: 'datetime'
+            });
+            $('.save').click(function () {
+                var menu = $("#UserPopedomList").jstree('get_checked');
+                var ids = "";
+                for (i = 0; i < menu.size(); i++) {
+                    ids += menu[i].id.replace('t_', '') + ",";
+                }
+                $('.PermissionCode').val(ids);
+
+            });
+            //提交
+            form.on('submit(save)', function (obj) {
+                layer.load(0);
+                $.ajax({
+                    url: '@Url.Action("UserSave")',
+                    type: 'POST',
+                    data: obj.field,
+                    success: function (rst) {
+                        layer.closeAll();
+                        if (rst) {
+                            layer.msg(rst.ErrorDesc, { icon: 1 });
+                            if (rst.Status) {
+                                if (parent) {
+                                    parent.location.reload();
+                                } else {
+                                    location.reload();
+                                }
+                            }
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+}

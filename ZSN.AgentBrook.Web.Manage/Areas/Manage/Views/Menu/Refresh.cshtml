@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Refresh";
+}
+
+<script type="text/javascript">
+    var url = "Refresh1";
+    RoadUI.Core.showWait("正在更新...");
+    $.ajax({
+        url: url, contentType: RoadUI.Core.ajaxContentType, type: "Post", dataType: "text", cache: false, async: true,
+        success: function (txt)
+        {
+            alert(txt);
+            RoadUI.Core.closeWait();
+            top.mainTab.closeTab();
+        }
+    });
+</script>

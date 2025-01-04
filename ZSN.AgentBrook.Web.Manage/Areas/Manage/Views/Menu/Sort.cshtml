@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Sort";
+}
+<link href="~/Content/Theme/Common.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/Theme/blue/Style/style.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/Theme/blue/Style/ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="~/roadui/roadui.dragsort.js"></script>
+
+@model IEnumerable<MenuInfo>
+<form method="post">
+    @Html.AntiForgeryToken()
+    <br />
+    <div style="padding-left:7px; width:83%; margin:0 auto; height:auto;" id="sortdiv">
+        @foreach (var app in Model)
+        {
+            <ul class="sortul">
+                <input type="hidden" value="@app.ID" name="sortapp" />
+                @app.Title
+            </ul>
+        }
+    </div>
+    <div class="buttondiv">
+        <input type="submit" class="mybutton" value="保存排序" />
+        <input type="button" class="mybutton" value="返回" onclick="re();" />
+    </div>
+</form>
+<script type="text/javascript">
+
+    $(function ()
+    {
+        @Html.Raw(ViewBag.Script)
+        new RoadUI.DragSort($("#sortdiv"));
+    });
+    function re()
+    {
+        window.location = "Body" + "@Html.Raw(HttpContextHelper.QueryString)";
+    }
+</script>

@@ -1,0 +1,96 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Cache\**" />
+    <Compile Remove="SearchEngine\**" />
+    <Compile Remove="Temp\**" />
+    <Compile Remove="Zxw.Framework.NetCore\**" />
+    <EmbeddedResource Remove="Cache\**" />
+    <EmbeddedResource Remove="SearchEngine\**" />
+    <EmbeddedResource Remove="Temp\**" />
+    <EmbeddedResource Remove="Zxw.Framework.NetCore\**" />
+    <None Remove="Cache\**" />
+    <None Remove="SearchEngine\**" />
+    <None Remove="Temp\**" />
+    <None Remove="Zxw.Framework.NetCore\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Attributes\FromDbContextFactoryAttribute.cs" />
+    <Compile Remove="Attributes\MemoryCacheAttribute.cs" />
+    <Compile Remove="Attributes\RedisCacheAttribute.cs" />
+    <Compile Remove="Helpers\CacheHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="log4net.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DotNetCore.NPOI" Version="1.2.2" />
+    <PackageReference Include="ICanPay.Alipay" Version="1.2.2" />
+    <PackageReference Include="ICanPay.Core" Version="1.2.3" />
+    <PackageReference Include="ICanPay.Unionpay" Version="1.2.2" />
+    <PackageReference Include="ICanPay.Wechatpay" Version="1.2.4" />
+    <PackageReference Include="jieba.NET" Version="0.42.2" />
+    <PackageReference Include="log4net" Version="2.0.17" />
+    <PackageReference Include="Lucene.Net" Version="4.8.0-beta00008" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Garnet" Version="1.0.39" />
+    <PackageReference Include="NLog" Version="4.6.8" />
+    <PackageReference Include="QRCoder" Version="1.3.9" />
+    <PackageReference Include="Senparc.Weixin" Version="6.6.104.1" />
+    <PackageReference Include="Senparc.Weixin.MP" Version="16.9.104.1" />
+    <PackageReference Include="StackExchange.Redis" Version="2.1.58" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Temp\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LitJSON\LitJSON.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\char_state_tab.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\cn_synonym.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\dict.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\idf.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\pos_prob_emit.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\pos_prob_start.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\pos_prob_trans.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\prob_emit.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\prob_trans.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\stopwords.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

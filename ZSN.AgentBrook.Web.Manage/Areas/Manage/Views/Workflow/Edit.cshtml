@@ -1,0 +1,91 @@
+﻿@{
+    var Workflow = ViewBag.Workflow as WorkflowInfo;
+    var MainName = ViewBag.MainName as string;
+    var MainID = ViewBag.MainID as string;
+    var MainType = ViewBag.MainType as int?;
+
+    var PreviewHost = ViewBag.PreviewHost as string;
+}
+
+@section Css
+{
+    <style>
+        .layui-form-label {
+            width: 120px;
+        }
+
+        .no_padding{padding:0;}
+
+        #container {
+            width: 100%;
+            min-height: calc(100vh);
+            
+        }
+
+            #container .workflow {
+                width: 100%;
+                min-height: calc(100vh);
+                border:1px solid #f0f0f0;
+            }
+    </style>
+}
+
+<div class="layui-row">
+    <div class="layui-card">
+        <div class="layui-card-body no_padding">
+            <form class="layui-form">
+                <input type="hidden" name="WorkFlowID" value="@Workflow.WorkflowID" />
+                <input type="hidden" name="MainName" value="@MainName" />
+                <input type="hidden" name="MainID" value="@MainID" />
+                <input type="hidden" name="MainType" value="@MainType" />
+                <div class="layui-card-body no_padding">
+                    <div id="container">
+                        <iframe class="workflow" src="/workflow/index.html?WorkFlowID=@Workflow.WorkflowID&MainID=@MainID&MainType=@MainType"></iframe>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Js
+{
+    <script>
+        layui.use(function () {
+            var form = layui.form,
+                layer = layui.layer,
+                xmSelect = layui.xmSelect;
+            form.render();
+
+            $('.save').click(function () {
+
+            });
+
+            //提交
+            form.on('submit(save)', function (obj) {
+                layer.load(0);
+
+                $.ajax({
+                    url: '@Url.Action("Save")',
+                    type: 'POST',
+                    data: obj.field,
+                    success: function (rst) {
+                        layer.closeAll();
+                        if (rst) {
+                            layer.msg(rst.ErrorDesc, { icon: 1 });
+                            if (rst.Status) {
+                                if (parent) {
+                                    parent.location.reload();
+                                } else {
+                                    location.reload();
+                                }
+                            }
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+}

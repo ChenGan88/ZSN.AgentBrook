@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Body";
+}
+@model MenuInfo
+<link href="~/Scripts/bigcolorpicker/css/jquery.bigcolorpicker.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="~/Scripts/bigcolorpicker/js/jquery.bigcolorpicker.js"></script>
+<script type="text/javascript" src="~/Scripts/bigcolorpicker/js/syntaxHighlighter/shCore.js"></script>
+<script type="text/javascript" src="~/Scripts/bigcolorpicker/js/syntaxHighlighter/shBrushJScript.js"></script>
+<script type="text/javascript" src="~/Scripts/bigcolorpicker/js/syntaxHighlighter/shBrushJava.js"></script>
+<link href="~/Scripts/bigcolorpicker/css/syntaxHighlighter/shCore.css" rel="stylesheet" type="text/css" />
+<link href="~/Scripts/bigcolorpicker/css/syntaxHighlighter/shCoreDefault.css" rel="stylesheet" type="text/css" />
+<link href="~/Scripts/bigcolorpicker/css/syntaxHighlighter/shThemeDefault.css" rel="stylesheet" type="text/css" />
+
+<link href="~/Content/Theme/Common.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/Theme/blue/Style/style.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/Theme/blue/Style/ui.css" rel="stylesheet" type="text/css" />
+
+<form method="post">
+    @Html.AntiForgeryToken()
+    <br />
+    <table cellpadding="0" cellspacing="1" border="0" width="95%" class="formtable">
+        <tr>
+            <th style="width:80px;">菜单名称：</th>
+            <td><input type="text" id="Name" name="Name" class="mytext" value="@Model.Title" validate="empty" style="width:75%" /></td>
+        </tr>
+        <tr>
+            <th style="width:80px;">关联程序(Url)：</th>
+            <td>
+                <input type="text" id="Url" name="Url" class="mytext" value="@Model.Url" validate="empty" style="width:75%" />
+            </td>
+        </tr>
+        <tr>
+            <th style="width:80px;">相关参数：</th>
+            <td><input type="text" id="Params" name="Params" value="@Model.Params" class="mytext" style="width:75%" /></td>
+        </tr>
+        <tr>
+            <th>图标：</th>
+            <td>
+                <input type="text" name="Ico" id="Ico" class="mytext" source="/images/ico" value="@Model.Ico" style="width: 200px" />
+                &nbsp;&nbsp;颜色：<input type="text" id="IcoColor" name="IcoColor" value="@Model.IcoColor" class="mytext" style="width:150px" />
+            </td>
+        </tr>
+               
+        <tr>
+            <th style="width:80px;">是否启用：</th>
+            <td>
+                <input type="radio" name="MState" value="0" title="开启" @(Model.MState == 0 ? "checked" : "")>
+                <input type="radio" name="MState" value="1" title="停用" @(Model.MState == 1 ? "checked" : "")>
+            </td>
+        </tr>
+    </table>
+    <div class="buttondiv">
+        <input type="hidden" name="ParentID" value="@Model.ParentID" />
+        <input type="button" value="添加子项" class="mybutton" onclick="window.location='AddApp'+'@HttpContextHelper.QueryString';" />
+        <input type="submit" value="保存" class="mybutton" name="Save" onclick="return new RoadUI.Validate().validateForm(document.forms[0]);" />
+        @if (Model != null && Model.ParentID != string.Empty)
+        {
+            <input type="submit" value="删除" class="mybutton" name="Delete" onclick="return confirm('真的要删除该角色应用及其所有下级应用吗?');" />
+            <input type="button" value="排序" class="mybutton bt_Sort" />
+        }
+    </div>
+</form>
+<script type="text/javascript">
+    $(function ()
+    {
+        @Html.Raw(ViewBag.Script)
+
+        $("#IcoColor").bigColorpicker();
+
+        $('.bt_Sort').click(function () {
+            location = "Sort" + "@Html.Raw(HttpContextHelper.QueryString)";
+        });
+    });
+</script>

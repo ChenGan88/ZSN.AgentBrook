@@ -1,0 +1,199 @@
+﻿@using ZSN.Utils.Core.Extensions
+@using ZSN.Utils.Core.Helpers
+@{
+    int pageIndex = ViewBag.PageIndex;
+    int pageSize = ViewBag.PageSize;
+    int pageTotal = ViewBag.PageTotal;
+    int total = ViewBag.Total;
+    string keyword = ViewBag.Keyword;
+    string pageTitle = ViewBag.PageTitle;
+    var LogRecordList = ViewBag.LogRecordList as List<LogRecord>;
+    var LogClassList = ViewBag.LogClassList as List<LogMarkClass>;
+    var LogMarkList = ViewBag.LogMarkList as List<LogMark>;
+    string MarkIds = ViewBag.MarkIds;
+    var midAry = string.IsNullOrEmpty(MarkIds) ? new List<int>(0) : MarkIds.Split(',').Select(t=>int.Parse(t)).ToList();
+}
+
+<style>
+    .jstb {
+        min-width: 30px !important;
+    }
+
+    .jstb2 {
+        min-width: 74px !important;
+    }
+</style>
+
+<div class="layui-row layui-form">
+    @*<button class="layui-btn" style="margin-right:50px;" onclick="AddClickEvent();"><i class="layui-icon"></i>增加</button>*@
+    @if (LogMarkList != null)
+    {
+    <label>日志类型</label>
+    @*<div class="layui-input-inline layui-show-xs-block" style="margin-right:200px;">
+            <select name="MarkId" lay-verify="required" lay-filter="LogType">
+                <option value="0">全部</option>
+                @foreach (var lt in LogTypeList)
+                {
+                    <option value="@lt.Id" @(lt.Id == MarkId ? "selected" : "")>[@lt.Id]@lt.MarkName</option>
+                }
+            </select>
+        </div>*@
+
+    <div id="logType"></div>
+    }
+    <div class="layui-input-inline" style="width: 300px;">
+        <input type="text" name="keyword" value="@keyword" class="layui-input" placeholder="搜索日志">
+    </div>
+    <button class="layui-btn js-result-search">搜索</button>
+</div>
+
+<div class="layui-form">
+    <table class="layui-table">
+        <colgroup>
+            <col width="30">
+            <col width="142">
+            <col width="142">
+            <col width="500">
+            <col width="180">
+            <col width="53">
+            <col width="53">
+            <col width="180">
+        </colgroup>
+        <thead>
+            <tr>
+                <th class="jstb">ID</th>
+                <th>日志类型</th>
+                <th>日志URL</th>
+                <th>详情</th>
+                <th>备注</th>
+                <th>ip</th>
+                <th>操作时间</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var l in LogRecordList)
+            {
+            <tr data-Id="@l.Id">
+                <td>@l.Id</td>
+                <td>@(LogMarkList.FirstOrDefault(t => t.Id == l.MarkId)?.MarkName)</td>
+                <td>@(l.LogUrl)</td>
+                <td><textarea style="width:100%;height:200px;">@l.LogDetail</textarea></td>
+                @* <td>@Html.Raw(l.LogDetail.Replace(Environment.NewLine, "<br/>"))</td>*@
+                <td>@Html.Raw(l.LogRemarks)</td>
+                <td>@l.LogCreatorIP</td>
+                <td>@l.OperateTime.ToString("yyyy-MM-dd HH:mm")</td>
+            </tr>
+            }
+            @if (LogRecordList.Count == 0)
+            {
+            <tr>
+                <td colspan="6">暂无日志</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <div id="pageId" class="pagination"></div>
+</div>
+
+@section Js{
+    <script>
+        layui.use(function () {
+            var laypage = layui.laypage;
+            var pageIndex = @pageIndex;
+            var pageSize = @pageSize;
+            var pageTotal = @pageTotal;
+            var total = @total;
+            var keyword = encodeURIComponent('@keyword');
+
+            var MarkIds = [@MarkIds];
+            var form = layui.form;
+
+            form.render();
+
+            var tree = layui.tree;
+            var data = [];
+
+            @foreach (var lc in LogClassList)
+                {
+                var lst = LogMarkList.Where(t => t.ClassId == lc.Id).ToList();
+                <text>
+                                var d@(lc.Id) = {
+                title: '[@lc.Id]@lc.ClassName',
+                    children: [],
+                        id: 'm@(lc.Id)'
+            };
+            </text>
+            foreach (var m in lst)
+                {
+                <text>
+                d@(lc.Id)["children"].push({
+                    title: '[@m.Id]@m.MarkName',
+                    id: '@m.Id',
+                    checked: @(midAry.Contains(m.Id) ? "true":"false")
+                                    });
+            </text>
+            }
+                <text>
+                data.push(d@(lc.Id));
+            </text>
+            }
+
+                        //渲染
+                        var inst1 = tree.render({
+                elem: '#logType' //绑定元素
+                ,
+                data: data,
+                showCheckbox: true,
+                id: 'demoId'
+            });
+            //console.log(data);
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'pageId',
+                count: total,
+                limit: pageSize,
+                curr: pageIndex,
+                layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip'],
+                jump: function (obj, f) {
+                    if (f)
+                        return;
+                    location.href = "@Url.Action("LogRecordList")?pageIndex=" +
+                        obj.curr +
+                        "&pageSize=" +
+                        obj.limit +
+                        "&keyword=" +
+                        keyword +
+                        "&MarkIds=" +
+                        getMarkIds() + "&appid=@HttpContextHelper.Request.GetParam("appid")";
+
+                }
+            });
+
+
+            function getMarkIds() {
+                var checkedData = tree.getChecked('demoId'); //获取选中节点的数据
+                var mids = [];
+                for (var i = 0; i < checkedData.length; i++) {
+                    var d = checkedData[i].children;
+                    for (var j = 0; j < d.length; j++) {
+                        mids.push(d[j].id);
+                    }
+                }
+                var ids = mids.join(',');
+                return ids;
+            }
+
+            $('.js-result-search').unbind().click(function () {
+                location.href = "@Url.Action("LogRecordList")?pageIndex=" +
+                    1 +
+                    "&pageSize=" +
+                    pageSize +
+                    "&keyword=" +
+                    $('input[name="keyword"]').val() +
+                    "&MarkIds=" +
+                    getMarkIds() + "&appid=@HttpContextHelper.Request.GetParam("appid")";
+            });
+
+        });
+    </script>
+}

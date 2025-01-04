@@ -1,0 +1,171 @@
+﻿@using ZSN.AI.Entity.Model.Enum
+@{
+    var lst = ViewBag.KnowledgeBaseFileList as List<KnowledgeBaseFileInfo>;
+}
+@section Css{
+}
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-input-inline layui-show-xs-block">
+                        <button class="layui-btn add_bt" >
+                            <i class="layui-icon"></i>上传
+                        </button>
+                    </div>
+                    <hr>
+                </div>
+                <div class="layui-card-body">
+                    <table class="layui-table layui-form">
+                        <colgroup>
+                            <col width="150">
+                            <col>
+                            <col>
+                            <col width="50">
+                            <col width="50">
+                            <col width="50">
+                            <col width="200">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>名称</th>
+                                <th>路径</th>
+                                <th>分块数</th>
+                                <th>创建时间</th>
+                                <th>状态</th>
+                                <th>设置</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var KnowledgeBaseFile in lst)
+                            {
+                                <tr data-FileID="@KnowledgeBaseFile.FileID">
+                                    <td>@KnowledgeBaseFile.FileID</td>
+                                    <td>@KnowledgeBaseFile.FileName</td>
+                                    <td>@KnowledgeBaseFile.FilePath</td>
+                                    <td>@KnowledgeBaseFile.DataCount</td>
+                                    <td>@KnowledgeBaseFile.CreateTime</td>
+                                <td>
+                                        @(KnowledgeBaseFile.SystemStatus == ImportKmsStatus.Fail ? "失败" : KnowledgeBaseFile.SystemStatus == ImportKmsStatus.Watting ? "等待分析" : KnowledgeBaseFile.SystemStatus == ImportKmsStatus.Loadding ? "分析中" : KnowledgeBaseFile.SystemStatus == ImportKmsStatus.Success ? "完成" : "")
+                                </td>
+                                <td><nobr>
+                                        <button class="layui-btn do_bt" data-id="@KnowledgeBaseFile.FileID">
+                                            分块处理
+                                        </button>
+                                        @if(KnowledgeBaseFile.SystemStatus == ImportKmsStatus.Success)
+                                        {
+                                            <button class="layui-btn edit_bt" data-id="@KnowledgeBaseFile.FileID">
+                                                查看分块
+                                            </button>
+                                        }
+                                        <button class="layui-btn del" data-id="@KnowledgeBaseFile.FileID">
+                                            删除
+                                        </button>
+                                    </nobr>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="layui-card-body ">
+                    <div class="pagination" id="pageId">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Js{
+    <script>
+        layui.use(function () {
+            var form = layui.form;
+            var laypage = layui.laypage;
+            form.render();
+
+            laypage.render({
+                elem: 'pageId'
+                , count: @ViewBag.Total
+                            , limit: @ViewBag.Size
+                            , curr: @ViewBag.Index
+                            , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , jump: function (obj, f) {
+                    if (f)
+                        return;
+                    location.href = "@Url.Action("filelist")?KnowledgeBaseID=@ViewBag.KnowledgeBaseID&index=" + obj.curr + "&size=" + obj.limit + "&appid=@HttpContextHelper.Request.GetParam("appid")";
+                }
+            });
+
+            /*新增*/
+            $('.add_bt').click(function () {
+                var url = '@Url.Action("EditFile")' + '?KnowledgeBaseID=@ViewBag.KnowledgeBaseID';
+                layer.open({
+                    type: 2,
+                    title: '上传文件',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['60%', '230px'],
+                    content: url
+                });
+            });
+
+            /*查看*/
+            $('.edit_bt').click(function () {
+                var FileID = $(this).data('id');;
+                var url = '@Url.Action("EditFile")' + "?KnowledgeBaseID=@ViewBag.KnowledgeBaseID&FileID=" + FileID;
+                layer.open({
+                    type: 2,
+                    title: '查看分块',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['100%', '100%'],
+                    content: url
+                });
+            });
+
+            /*添加分块任务*/
+            $('.do_bt').click(function () {
+                var FileID = $(this).data('id');
+                layer.confirm("文件进入分块分析处理过程中会重置该文件原有分块数据，分块过程请确保异步任务服务正常运行!", { title: "确认分块分析" }, function (index) {
+
+                    $.ajax({
+                        url: '@Url.Action("KnowledgeBaseFileToJob")',
+                        type: 'POST',
+                        data: {
+                            KnowledgeBaseID: '@ViewBag.KnowledgeBaseID',
+                            FileID: FileID
+                        },
+                        success: function (res) {
+                            layer.msg(res.msg, { icon: 1, time: 1000 }, function () { location.reload(); });
+                        }
+                    });
+
+                });
+            });
+
+            $('.del').click(function () {
+                var id = $(this).data('id');
+
+                layer.confirm("确认要删除吗，删除后不能恢复!", { title: "删除确认" }, function (index) {
+
+                    $.ajax({
+                        url: '@Url.Action("KnowledgeBaseFileDel")',
+                        type: 'POST',
+                        data: {
+                            mid: id,
+                            KnowledgeBaseID:'@ViewBag.KnowledgeBaseID'
+                        },
+                        success: function (res) {
+                            layer.msg(res.msg, { icon: 1, time: 1000 }, function () { location.reload(); });
+                        }
+                    });
+
+                });
+            });
+
+        });
+    </script>
+}

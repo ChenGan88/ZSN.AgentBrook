@@ -1,0 +1,184 @@
+﻿@{
+    int pageIndex = ViewBag.PageIndex;
+    int pageSize = ViewBag.PageSize;
+    int pageTotal = ViewBag.PageTotal;
+    int total = ViewBag.Total;
+    var pageTitle = ViewBag.PageTitle;
+    string keyword = ViewBag.Keyword;
+    var dicList = ViewBag.DicList as List<BaseDictionaryInfo>;
+    int pid = ViewBag.Pid;
+}
+
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div class="layui-input-inline layui-show-xs-block">
+                    <button class="layui-btn add_bt" ><i class="layui-icon"></i>增加</button>
+                    @if (pid != 0)
+                    {
+                        <a class="layui-btn" href="javascript:history.back(-1)">返回</a>
+                    }
+                </div>
+                <hr>
+            </div>
+            <div class="layui-card-body" style="overflow: auto">
+                <table class="layui-table layui-form">
+                    <colgroup>
+                        <col width="20">
+                        <col width="200">
+                        <col width="200">
+                        <col>
+                        <col width="80">
+                        <col width="80">
+                        <col width="300">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>字典名</th>
+                            <th>字典Title</th>
+                            <th>字典值</th>
+                            <th>排序</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                    </thead>
+                    <tbody>
+                        @foreach (var d in dicList)
+                        {
+                            <tr data-did="@d.DicId">
+                                <td>@d.DicId</td>
+                                <td>@d.DicName</td>
+                                <td>@d.DicTitle</td>
+                                <td>@d.DicValue</td>
+                                <td><input type="text" class="layui-input" name="sort" value="@d.Sort"></td>
+                                <td>
+                                    <input type="checkbox" name="switch" lay-text="开启|停用" lay-skin="switch" lay-filter="status" @(d.Status ==0 ? "checked" : "")>
+                                </td>
+                                <td>
+                                    <button class="layui-btn layui-btn layui-btn-xs edit_bt"><i class="layui-icon">&#xe642;</i>编辑</button>
+                                    <a class="layui-btn layui-btn-xs layui-btn-warm" href="@Url.Action("DictionaryList", new {pid = d.DicId})&appid=@HttpContextHelper.Request.GetParam("appid")"><i class="layui-icon">&#xe642;</i>查看子栏目</a>
+                                    <button class="layui-btn-danger layui-btn layui-btn-xs del_bt"><i class="layui-icon">&#xe640;</i>删除</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div id="pageId" class="pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Js{
+<script>
+    layui.use(function () {
+        var laypage = layui.laypage;
+        var pageIndex = @pageIndex;
+        var pageSize = @pageSize;
+        var pageTotal = @pageTotal;
+        var total = @total;
+        var pid = @pid;
+        var keyword = encodeURIComponent('@keyword');
+
+        var form = layui.form;
+        var $ = layui.$;
+
+        form.render();
+
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'pageId'
+            , count: total
+            , limit: pageSize
+            , curr: pageIndex
+            , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+            , jump: function (obj, f) {
+                if (f)
+                    return;
+                location.href = "@Url.Action("DictionaryList")?pageIndex=" + obj.curr + "&pageSize=" + obj.limit + "&keyword=" + keyword + "&pid=" + pid + "&appid=@HttpContextHelper.Request.GetParam("appid")";
+            }
+        });
+
+        /*用户-删除*/
+        $('.del_bt').click(function () {
+            var did = $(this).parents("tr").data('did');
+            layer.confirm('确认要删除吗？',
+                function (index) {
+                    //发异步删除数据
+                    $.ajax({
+                        url: '@Url.Action("DictionaryDel")',
+                        type: 'POST',
+                        data: {
+                                id: did
+                        },
+                        success: function (res) {
+                            layer.msg('已删除', { icon: 1, time: 1000 });
+                            location.reload();
+                        }
+                    });
+                });
+        });
+
+        form.on('switch(status)',
+            function (data) {
+                    $.ajax({
+                    url: '@Url.Action("DictionaryStatus")',
+                    type: 'POST',
+                    data: {
+                        did: $(this).parents("tr").data('did'),
+                        status: (this.checked ? 'true' : 'false')
+                    },
+                    success: function (res) {
+                        layer.msg('已修改', { icon: 1, time: 1000 });
+                    }
+                });
+            });
+
+        $('input[name="sort"]').change(function () {
+            var did = $(this).parents("tr").data('did');
+                $.ajax({
+                url: '@Url.Action("DictionarySort")',
+                type: 'POST',
+                data: {
+                    did: did,
+                    sort: $(this).val()
+                },
+                success: function (res) {
+                    layer.msg('已修改', { icon: 1, time: 1000 });
+                }
+            });
+        });
+
+
+        /*新增*/
+        $('.add_bt').click(function () {
+            var url = '@Url.Action("DictionaryEdit")' + "?pid=" + @pid;
+            layer.open({
+                type: 2,
+                title: '新增',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['100%', '100%'],
+                content: url
+            });
+        });
+
+        /*编辑*/
+        $('.edit_bt').click(function () {
+                var dicId = $(this).parents("tr").data('did');
+                var url = '@Url.Action("DictionaryEdit")' + "?did=" + dicId + "&pid=" + @pid;
+                layer.open({
+                    type: 2,
+                    title: '编辑',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['100%', '100%'],
+                    content: url
+                });
+        });
+
+    });
+</script>
+}

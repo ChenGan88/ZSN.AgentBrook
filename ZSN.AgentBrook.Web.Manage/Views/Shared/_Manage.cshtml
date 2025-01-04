@@ -1,0 +1,50 @@
+﻿
+@using ZSN.AI.Service.Common
+@{
+    var v = "1";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>@ViewData["Title"]</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <script src="/lib/jquery/jquery-1.8.2.js"></script>
+    <script src="/layui/layui.js"></script>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/login.css" media="all">
+
+    <script type="text/javascript" src="~/roadui/roadui.core.js?v=@v"></script>
+    <script type="text/javascript" src="~/roadui/roadui.tree.js?v=@v"></script>
+    <script type="text/javascript" src="~/roadui/roadui.treetable.js?v=@v"></script>
+
+
+
+
+    @if (IsSectionDefined("Css"))
+    {
+        @Html.Partial("_Css")
+        @RenderSection("Css", false)
+    }
+</head>
+<body>
+
+    @RenderBody()
+
+    @if (IsSectionDefined("Js"))
+    {
+        @Html.Partial("_Js")
+        @RenderSection("Js", false)
+    }
+    @if (IsSectionDefined("FileUpload"))
+    {
+        @Html.Partial("_FileUpload")
+        @RenderSection("FileUpload", false)
+    }
+
+    
+</body>
+</html>

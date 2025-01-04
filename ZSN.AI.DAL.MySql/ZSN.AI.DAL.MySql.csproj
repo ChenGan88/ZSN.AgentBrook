@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="App\" />
+    <Folder Include="Member\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.33" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZSN.AI.DAL\ZSN.AI.DAL.csproj" />
+    <ProjectReference Include="..\ZSN.AI.Entity\ZSN.AI.Entity.csproj" />
+  </ItemGroup>
+
+</Project>

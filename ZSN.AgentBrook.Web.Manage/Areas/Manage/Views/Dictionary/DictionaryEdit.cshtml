@@ -1,0 +1,110 @@
+@{
+    var dic = ViewBag.Dic as BaseDictionaryInfo;
+}
+
+<div class="layui-row">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <form class="layui-form">
+                <input type="hidden" value="@dic.DicId" name="DicId" />
+                <input type="hidden" value="@dic.Pid" name="Pid" />
+                <input type="hidden" value="@dic.Cid" name="Cid" />
+                <input type="hidden" value="@dic.CreateTime" name="CreateTime" />
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>字典名称
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="DicName" lay-verify="required" value="@dic.DicName"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        字典Title
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="DicTitle" value="@dic.DicTitle"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        字典值
+                    </label>
+                    <div class="layui-input-block">
+                        <textarea name="DicValue" class="layui-textarea">@dic.DicValue</textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        字典备注
+                    </label>
+                    <div class="layui-input-block">
+                        <textarea name="DicRemark" class="layui-textarea">@dic.DicRemark</textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        是否启用
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="Status" value="0" title="开启" @(dic.Status ==0 ? "checked" : "")>
+                        <input type="radio" name="Status" value="1" title="停用" @(dic.Status == 1 ? "checked" : "")>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        排序
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="Sort" value="@dic.Sort" lay-verify="number"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"></label>
+                    <button class="layui-btn" lay-filter="save" lay-submit >
+                        保存
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Js
+{
+    <script>
+        layui.use(function () {
+            var form = layui.form,
+                layer = layui.layer,
+                $ = layui.$;
+            form.render();
+
+            //提交
+            form.on('submit(save)', function (obj) {
+                layer.load(0);
+                $.ajax({
+                    url: '@Url.Action("DictionarySave")',
+                    type: 'POST',
+                    data: obj.field,
+                    success: function (rst) {
+                        layer.closeAll();
+                        if (rst) {
+                            layer.msg(rst.ErrorDesc, { icon: 1 });
+                            if (rst.Status) {
+                                if(parent){
+                                    parent.location.reload();
+                                }else{
+                                    location.reload();
+                                }
+                            }
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+}

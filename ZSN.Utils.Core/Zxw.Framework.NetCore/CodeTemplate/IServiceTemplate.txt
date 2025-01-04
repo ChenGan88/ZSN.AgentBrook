@@ -1,0 +1,10 @@
+﻿using System;
+using Zxw.Framework.NetCore.IServices;
+using {ModelsNamespace};
+
+namespace {IServicesNamespace}
+{
+    public interface I{ModelTypeName}Service:IService<{ModelTypeName}, {KeyTypeName}>
+    {
+    }
+}

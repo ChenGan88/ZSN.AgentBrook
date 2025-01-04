@@ -1,0 +1,392 @@
+﻿@using ZSN.AI.Entity.Model.Enum
+@{
+    var LargeModel = ViewBag.LargeModel as LargeModelInfo;
+    var ModelTypeList = ViewBag.ModelTypeList as List<ModelType>;
+    var ModelOrganizationList = ViewBag.ModelOrganizationList as List<AIOrganization>;
+    var PreviewHost = ViewBag.PreviewHost as string;
+
+
+    var SemanticFunction = ViewBag.SemanticFunction != null ? ViewBag.SemanticFunction as List<PluginsInfo> : new List<PluginsInfo>();
+    var NativeFunction = ViewBag.NativeFunction != null ? ViewBag.NativeFunction as List<PluginsInfo> : new List<PluginsInfo>();
+}
+
+@section Css
+{
+    <style>
+        .layui-form-label {
+            width: 120px;
+        }
+    </style>
+}
+
+<div class="layui-row">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <form class="layui-form">
+                <input type="hidden" name="LargeModelID" value="@LargeModel.LargeModelID" />
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>模型显示名称
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="Name" lay-verify="required" value="@LargeModel.Name"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>模型名称
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="ModelName" lay-verify="required" value="@LargeModel.ModelName"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>模型Key
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="ModelKey" value="@LargeModel.ModelKey"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>图标
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="MICON" lay-verify="required" value="@LargeModel.MICON"
+                                   autocomplete="off" class="layui-input MICON">
+                            <div id="file-upload-container">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>模型类型
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <select class="ModelType" name="ModelType" lay-verify="required">
+                                <option value="">请选择一个类型</option>
+                                @foreach (ModelType _modelType in ModelTypeList)
+                                {
+                                    <option value="@_modelType.ID">@_modelType.Name</option>
+                                }
+                            </select>
+                            <input type="hidden" name="TypeCode" value="@Convert.ToInt32(LargeModel.TypeCode)"
+                                   autocomplete="off" class="layui-input TypeCode">
+                            <input type="hidden" name="TypeName" value="@LargeModel.TypeName"
+                                   autocomplete="off" class="layui-input TypeName">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>模型组织类型
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <select class="ModelOrganization" name="ModelOrganization" lay-verify="required">
+                                <option value="">请选择一个类型</option>
+                                @foreach (AIOrganization _ai in ModelOrganizationList)
+                                {
+                                    <option value="@_ai.ID">@_ai.Name</option>
+                                }
+                            </select>
+                            <input type="hidden" name="ModelOrganizationID" value="@Convert.ToInt32(LargeModel.ModelOrganizationID)"
+                                   autocomplete="off" class="layui-input ModelOrganizationID">
+                            <input type="hidden" name="ModelOrganizationName" value="@LargeModel.ModelOrganizationName"
+                                   autocomplete="off" class="layui-input ModelOrganizationName">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>模型地址
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="EndPoint" lay-verify="required" value="@LargeModel.EndPoint"
+                                   autocomplete="off" class="layui-input EndPoint">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>配置参数
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <textarea type="text" name="MConfig" lay-verify="required"
+                                      autocomplete="off" class="layui-input MConfig">@LargeModel.MConfig</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red"></span>简述
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <textarea type="text" name="Description" autocomplete="off" class="layui-input Description">@LargeModel.Description</textarea>
+                        </div>
+                    </div>
+                </div>
+                @*
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>提示词函数
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <div id="SemanticFunction" class="xm-select-demo"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>原生函数
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <div id="NativeFunction" class="xm-select-demo"></div>
+                        </div>
+                    </div>
+                </div>
+                *@
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>创建时间
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="CreateTime" readonly lay-verify="required" placeholder="YYYY-MM-DD HH:mm" value="@LargeModel.CreateTime.ToCurrentTime()"
+                                   autocomplete="off" class="layui-input CreateTime">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>更新时间
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="UpdateTime" readonly lay-verify="required" placeholder="YYYY-MM-DD HH:mm" value="@LargeModel.UpdateTime.ToCurrentTime()"
+                                   autocomplete="off" class="layui-input UpdateTime">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        状态
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="SystemStatus" value="0" title="正常" @(LargeModel.SystemStatus == 0 ? "checked" : "")>
+                        <input type="radio" name="SystemStatus" value="1" title="屏蔽" @(LargeModel.SystemStatus == 0 ? "" : "checked")>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn test" lay-filter="test" lay-submit>测试</button>
+                        <button class="layui-btn save" lay-filter="save" lay-submit>保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Js
+{
+    <script src="/layuiadmin/modules/xm-select.js"></script>
+    <script>
+        layui.use(function () {
+            var form = layui.form,
+                layer = layui.layer;
+            xmSelect = layui.xmSelect;
+            form.render();
+
+            $(".ModelType").val("@Convert.ToInt32(LargeModel.TypeCode)");
+            $(".ModelOrganization").val("@Convert.ToInt32(LargeModel.ModelOrganizationID)");
+            form.render("select");
+            @*
+            var ModelSemanticFunction = '@LargeModel.SemanticFunctionID';
+            var ModelNativeFunction = '@LargeModel.NativeFunctionID';
+
+            //SemanticFunction
+            var SemanticFunction = xmSelect.render({
+                el: '#SemanticFunction',
+                toolbar: {
+                    show: true,
+                },
+                filterable: true,
+                height: '500px',
+                data: [
+        @foreach (var item in SemanticFunction)
+        {
+            @Html.Raw("  { name: '" + item.Name + "', value: '" + item.PluginsID + "'},")
+        }
+                ]
+            });
+
+            if (ModelSemanticFunction) {
+                var _setValue = ModelSemanticFunction.split(',');
+                SemanticFunction.setValue(_setValue);
+            }
+
+            function GetSemanticFunctionID() {
+                var _value = SemanticFunction.getValue();
+                return _value.map(obj => obj.value).join(', ');
+            }
+            function GetSemanticFunctionName() {
+                var _value = SemanticFunction.getValue();
+                return _value.map(obj => obj.name).join(', ');
+            }
+            //SemanticFunction
+
+            //NativeFunction
+            var NativeFunction = xmSelect.render({
+                el: '#NativeFunction',
+                toolbar: {
+                    show: true,
+                },
+                filterable: true,
+                height: '500px',
+                data: [
+        @foreach (var item in NativeFunction)
+        {
+            @Html.Raw("  { name: '" + item.Name + "', value: '" + item.PluginsID + "'},")
+        }
+                        ]
+            });
+
+            if (ModelNativeFunction) {
+                var _setValue = ModelNativeFunction.split(',');
+                NativeFunction.setValue(_setValue);
+            }
+
+            function GetNativeFunctionID() {
+                var _value = NativeFunction.getValue();
+                return _value.map(obj => obj.value).join(', ');
+            }
+            function GetNativeFunctionName() {
+                var _value = NativeFunction.getValue();
+                return _value.map(obj => obj.name).join(', ');
+            }
+            //NativeFunction
+            *@
+            function CheckValue() { 
+                $('.TypeCode').val($(".ModelType option:selected").val());
+                $('.TypeName').val($(".ModelType option:selected").text());
+
+                $('.ModelOrganizationID').val($(".ModelOrganization option:selected").val());
+                $('.ModelOrganizationName').val($(".ModelOrganization option:selected").text());
+            }
+            $('.test').click(function () {
+                CheckValue();
+            });
+            form.on('submit(test)', function (obj) {
+                layer.load(0);
+                //obj.field.SemanticFunctionID = GetSemanticFunctionID();
+                //obj.field.SemanticFunctionName = GetSemanticFunctionName();
+                //obj.field.NativeFunctionID = GetNativeFunctionID();
+                //obj.field.NativeFunctionName = GetNativeFunctionName();
+
+                $.ajax({
+                    url: '@Url.Action("Test")',
+                    type: 'POST',
+                    data: obj.field,
+                    success: function (rst) {
+                        layer.closeAll();
+                        if (rst) {
+                            layer.msg(rst.ErrorDesc, { icon: 1 });
+                            if (rst.Status) {
+                                alert(JSON.stringify(rst.Data));
+                            }
+                        }
+                    }
+                });
+                return false;
+            });
+
+
+            $('.save').click(function () {
+                CheckValue();
+            });
+            //提交
+            form.on('submit(save)', function (obj) {
+                layer.load(0);
+                //obj.field.SemanticFunctionID = GetSemanticFunctionID();
+                //obj.field.SemanticFunctionName = GetSemanticFunctionName();
+                //obj.field.NativeFunctionID = GetNativeFunctionID();
+                //obj.field.NativeFunctionName = GetNativeFunctionName();
+
+                $.ajax({
+                    url: '@Url.Action("LargeModelSave")',
+                    type: 'POST',
+                    data: obj.field,
+                    success: function (rst) {
+                        layer.closeAll();
+                        if (rst) {
+                            layer.msg(rst.ErrorDesc, { icon: 1 });
+                            if (rst.Status) {
+                                if (parent) {
+                                    parent.location.reload();
+                                } else {
+                                    location.reload();
+                                }
+                            }
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+}
+@section FileUpload{
+
+    <script>
+        $(function () {
+            var form = layui.form, layer = layui.layer;
+            form.render();
+
+            var _MICON = function () {
+                var fileCodeElement = $('.MICON');
+                var fileUploadContainer = $('#file-upload-container');
+
+                var options = {
+                    url: '/Controls/UploadFiles/Save',
+                    previewType: 'img',
+                    previewHost: '@PreviewHost',
+                    previewW: 150,
+                    previewH: 150, 
+                    setPicW: 300,
+                    setPicH: 300,
+                    layui: layui,
+                    formData: {
+                        //example: 'test'
+                    },
+                };
+
+                FileUploadPlugin(fileUploadContainer, fileCodeElement, options);
+            };
+            _MICON();
+        });
+
+    </script>
+}

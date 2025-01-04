@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZSN.AI.BLL\ZSN.AI.BLL.csproj" />
+    <ProjectReference Include="..\ZSN.AI.Core\ZSN.AI.Core.csproj" />
+    <ProjectReference Include="..\ZSN.Utils.Core\ZSN.Utils.Core.csproj" />
+  </ItemGroup>
+
+</Project>

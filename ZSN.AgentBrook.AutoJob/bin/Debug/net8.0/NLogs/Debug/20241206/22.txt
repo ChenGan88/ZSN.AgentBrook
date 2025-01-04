@@ -1,0 +1,3 @@
+Batch acquisition of 0 triggers
+Trigger instruction : NoInstruction
+Trigger instruction : NoInstruction

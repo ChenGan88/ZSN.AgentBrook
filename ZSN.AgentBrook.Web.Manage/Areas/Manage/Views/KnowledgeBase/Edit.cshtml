@@ -1,0 +1,277 @@
+﻿@{
+    var KnowledgeBase = ViewBag.KnowledgeBase as KnowledgeBaseInfo;
+
+    var KnowledgeBaseTypeList = ViewBag.KnowledgeBaseTypeList as List<BaseDictionaryInfo>;
+    var PreprocessModeList = ViewBag.PreprocessModeList as List<LargeModelInfo>;
+    var VectorModelList = ViewBag.VectorModelList as List<LargeModelInfo>;
+    var PreviewHost = ViewBag.PreviewHost as string;
+}
+
+@section Css
+{
+    <style>
+        .layui-form-label {
+            width: 120px;
+        }
+    </style>
+}
+
+<div class="layui-row">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <form class="layui-form">
+                <input type="hidden" name="KnowledgeBaseID" value="@KnowledgeBase.KnowledgeBaseID" />
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>知识库名称
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="Name" lay-verify="required" value="@KnowledgeBase.Name"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>知识库类型
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <div id="Knowledge_Base_Type" class="xm-select-demo"></div>
+                            <input type="hidden" name="DicIDList" lay-verify="required" value="@KnowledgeBase.DicIDList"
+                                   autocomplete="off" class="layui-input DicIDList">
+                            <input type="hidden" name="DicNameList" lay-verify="required" value="@KnowledgeBase.DicNameList"
+                                   autocomplete="off" class="layui-input DicNameList">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>预处理模型
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <select class="PreprocessMode" name="PreprocessMode" lay-verify="required">
+                                <option value="">请选择一个类型</option>
+                                @foreach (LargeModelInfo _model in PreprocessModeList)
+                                {
+                                    <option value="@_model.LargeModelID">@_model.Name</option>
+                                }
+                            </select>
+                            <input type="hidden" name="PreprocessModelID" lay-verify="required" value="@KnowledgeBase.PreprocessModelID"
+                                   autocomplete="off" class="layui-input PreprocessModelID">
+                            <input type="hidden" name="PreprocessModelName" lay-verify="required" value="@KnowledgeBase.PreprocessModelName"
+                                   autocomplete="off" class="layui-input PreprocessModelName">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>向量模型
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <select class="VectorModel" name="VectorModel" lay-verify="required">
+                                <option value="">请选择一个类型</option>
+                                @foreach (LargeModelInfo _model in VectorModelList)
+                                {
+                                    <option value="@_model.LargeModelID">@_model.Name</option>
+                                }
+                            </select>
+                            <input type="hidden" name="VectorModelID" lay-verify="required" value="@KnowledgeBase.VectorModelID"
+                                   autocomplete="off" class="layui-input VectorModelID">
+                            <input type="hidden" name="VectorModelName" lay-verify="required" value="@KnowledgeBase.VectorModelName"
+                                   autocomplete="off" class="layui-input VectorModelName">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>段落切片(1000 Tokens Max)
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="ParagraphSlice" lay-verify="required" value="@KnowledgeBase.ParagraphSlice"
+                                   autocomplete="off" class="layui-input ParagraphSlice">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>行切片数(300 Tokens Max)
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="LineSliceCount" lay-verify="required" value="@KnowledgeBase.LineSliceCount"
+                                   autocomplete="off" class="layui-input LineSliceCount">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>重叠部分(100 Tokens)
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="OverlapSection" lay-verify="required" value="@KnowledgeBase.OverlapSection"
+                                   autocomplete="off" class="layui-input OverlapSection">
+                        </div>
+                    </div>
+                </div>
+
+
+                
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>创建时间
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="CreateTime" readonly lay-verify="required" placeholder="YYYY-MM-DD HH:mm" value="@KnowledgeBase.CreateTime.ToCurrentTime()"
+                                   autocomplete="off" class="layui-input CreateTime">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red">*</span>更新时间
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="LastUpdateTime" readonly lay-verify="required" placeholder="YYYY-MM-DD HH:mm" value="@KnowledgeBase.LastUpdateTime.ToCurrentTime()"
+                                   autocomplete="off" class="layui-input LastUpdateTime">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        状态
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="SystemStatus" value="0" title="未发布" @(KnowledgeBase.SystemStatus == 0 ? "checked" : "")>
+                        <input type="radio" name="SystemStatus" value="-1" title="屏蔽" @(KnowledgeBase.SystemStatus == -1 ? "checked" : "")>
+                        <input type="radio" name="SystemStatus" value="1" title="正常" @(KnowledgeBase.SystemStatus == 1 ? "checked" : "")>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        收费类型
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="ChargeType" value="0" title="免费" @(KnowledgeBase.ChargeType == 0 ? "checked" : "")>
+                        <input type="radio" name="ChargeType" value="1" title="收费" @(KnowledgeBase.ChargeType == 0 ? "" : "checked")>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">
+                        <span class="x-red"></span>所属用户编号（空则为系统公共库）
+                    </label>
+                    <div class="layui-input-block">
+                        <div class="layui-col-md9">
+                            <input type="text" name="MemberID" value="@KnowledgeBase.MemberID"
+                                   autocomplete="off" class="layui-input MemberID">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+
+                        <button class="layui-btn save" lay-filter="save" lay-submit>保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Js
+{
+    <script src="/layuiadmin/modules/xm-select.js"></script>
+    <script>
+        layui.use(function () {
+            var form = layui.form,
+                layer = layui.layer;
+            form.render();
+
+            $(".PreprocessMode").val("@KnowledgeBase.PreprocessModelID");
+            $(".VectorModel").val("@KnowledgeBase.VectorModelID");
+            form.render("select");
+
+            var KnowledgeBasesTypeIDList = [@KnowledgeBase.DicIDList];
+
+            var Knowledge_Base_Type = xmSelect.render({
+                el: '#Knowledge_Base_Type',
+                toolbar: {
+                    show: true,
+                },
+                filterable: true,
+                height: '500px',
+                data: [
+                    @foreach (var _type in KnowledgeBaseTypeList)
+                    {
+                    @Html.Raw("  { name: '" + _type.DicName + "', value: '" + _type.DicId + "'},")
+                    }
+                ]
+            });
+
+            if (KnowledgeBasesTypeIDList) {
+                var _setValue = [];
+                for (var i = 0; i < KnowledgeBasesTypeIDList.length; i++) {
+                    _setValue.push(KnowledgeBasesTypeIDList[i]);
+                }
+                Knowledge_Base_Type.setValue(_setValue);
+            }
+            function GetKnowledge_Base_Type() {
+                var _value = Knowledge_Base_Type.getValue();
+                var _id = [];
+                var _name = [];
+                if (_value) {
+                    for (var i = 0; i < _value.length; i++) {
+                        _id.push(_value[i].value); 
+                        _name.push(_value[i].name);
+                    }
+                }
+                $('.DicIDList').val(_id.join(','));
+                $('.DicNameList').val(_name.join(','));
+            }
+            $('.save').click(function () {
+                GetKnowledge_Base_Type();
+                $('.PreprocessModelID').val($(".PreprocessMode option:selected").val());
+                $('.PreprocessModelName').val($(".PreprocessMode option:selected").text());
+
+                $('.VectorModelID').val($(".VectorModel option:selected").val());
+                $('.VectorModelName').val($(".VectorModel option:selected").text());
+            });
+            //提交
+            form.on('submit(save)', function (obj) {
+                layer.load(0);
+                $.ajax({
+                    url: '@Url.Action("KnowledgeBaseSave")',
+                    type: 'POST',
+                    data: obj.field,
+                    success: function (rst) {
+                        layer.closeAll();
+                        if (rst) {
+                            layer.msg(rst.ErrorDesc, { icon: 1 });
+                            if (rst.Status) {
+                                if (parent) {
+                                    parent.location.reload();
+                                } else {
+                                    location.reload();
+                                }
+                            }
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+}

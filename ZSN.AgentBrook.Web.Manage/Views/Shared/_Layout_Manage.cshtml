@@ -1,0 +1,192 @@
+﻿@using ZSN.AI.Entity.Chat
+@using ZSN.AI.Service.Common
+@{
+    var Users = ViewBag.Users as UserInfo;
+    List<MenuInfo> Menus = ViewBag.Menus as List<MenuInfo>;
+
+    var HelperAgent =  ChatRobot.Config;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <script src="/lib/jquery/jquery-1.8.2.js"></script>
+    <script src="/layui/layui.js"></script>
+
+    <link rel="stylesheet" href="/css/site.css" media="all">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/login.css" media="all">
+
+    <script>
+        window.chatParams = {
+            appid: "@HelperAgent?.AppID",
+            key: "@HelperAgent?.Key",
+            api: "@HelperAgent?.Api",
+            sessionid: "@HelperAgent?.SessionID"
+        };
+    </script>
+    <script type="module" crossorigin src="../chat/assets/index.js"></script>
+    <link rel="stylesheet" crossorigin href="../chat/assets/index.css">
+    
+</head>
+<body class="layui-layout-body">
+    <!--HelperAgent-->
+    <div id="app"></div>
+
+    <div id="LAY_app">
+        <div class="layui-layout layui-layout-admin">
+            <div class="layui-header">
+                <!-- 头部区域 -->
+                <ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item layadmin-flexible" lay-unselect>
+                        <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
+                            <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+
+                    
+                    <li class="layui-nav-item" lay-unselect>
+                        <a href="javascript:;">
+                            <cite>@Users.UName</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a lay-href="/Manage/UserManage/password">修改密码</a></dd>
+                            <hr>
+                            <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
+                        </dl>
+                    </li>
+
+                    <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                        <a href="javascript:;" layadmin-event="about"><i class="layui-icon layui-icon-more-vertical"></i></a>
+                    </li>
+                    <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
+                        <a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 侧边菜单 -->
+            <div class="layui-side layui-side-menu">
+                <div class="layui-side-scroll">
+                    <div class="layui-logo" lay-href="/Manage/Main">
+                        <span>AgentBrook</span>
+                    </div>
+
+                    <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+                        @{
+                            foreach (var Menu in Menus.FindAll(x => x.ParentID == "9BBEBABB-ACCD-4E2E-9AAE-61D072553C93"))
+                            {
+                                <li class="layui-nav-item">
+                                    @if (Menu.Params == "menu")
+                                    {
+                                        @if (Menus.Exists(x => x.ParentID == Menu.ID))
+                                        {
+                                            <a href="javascript:;" lay-tips="@Menu.Title" lay-direction="2">
+                                                <i class="layui-icon layui-icon-component"></i>
+                                                <cite>@Menu.Title</cite>
+                                            </a>
+
+                                            @foreach (var Menu2 in Menus.FindAll(x => x.ParentID == Menu.ID))
+                                            {
+                                                @if (Menu2.Params == "menu")
+                                                {
+                                                    <dl class="layui-nav-child">
+                                                        <dd data-name="grid">
+                                                            @if (Menus.Exists(x => x.ParentID == Menu2.ID))
+                                                            {
+                                                                <a href="javascript:;">@Menu2.Title</a>
+                                                                <dl class="layui-nav-child">
+                                                                    @foreach (var Menu3 in Menus.FindAll(x => x.ParentID == Menu2.ID))
+                                                                    {
+                                                                        @if (Menu3.Params == "menu")
+                                                                        {
+                                                                            <dd><a lay-href="@Menu3.Url">@Menu3.Title</a></dd>
+                                                                        }
+                                                                    }
+                                                                </dl>
+                                                            }else{
+                                                                <a lay-href="@Menu2.Url">@Menu2.Title</a>
+                                                            }
+                                                        </dd>
+                                                    </dl>
+                                                }
+                                            }
+                                        }else{
+                                            <a href="javascript:;" lay-tips="@Menu.Title" lay-direction="2">
+                                                <i class="layui-icon layui-icon-component"></i>
+                                                <cite><a lay-href="@Menu.Url">@Menu.Title</a></cite>
+                                            </a>
+                                    
+                                        }
+                                    }
+                                </li>
+                            }
+                        }
+
+                    </ul>
+                    <div class="main_copyright">
+                        <p>
+                            © @DateTime.Now.Year 知数能
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- 页面标签 -->
+            <div class="layadmin-pagetabs" id="LAY_app_tabs">
+                <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+                <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+                <div class="layui-icon layadmin-tabs-control layui-icon-down">
+                    <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+                        <li class="layui-nav-item" lay-unselect>
+                            <a href="javascript:;"></a>
+                            <dl class="layui-nav-child layui-anim-fadein">
+                                <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
+                                <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
+                                <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+                <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+                    <ul class="layui-tab-title" id="LAY_app_tabsheader">
+                        <li lay-id="/Manage/Main" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <!-- 主体内容 -->
+            <div class="layui-body" id="LAY_app_body">
+                <div class="layadmin-tabsbody-item layui-show">
+                    @RenderBody()
+                    <iframe src="/Manage/Main" frameborder="0" class="layadmin-iframe"></iframe>
+                </div>
+            </div>
+
+            <!-- 辅助元素，一般用于移动设备下遮罩 -->
+            <div class="layadmin-body-shade" layadmin-event="shade"></div>
+        </div>
+    </div>
+    <script>
+        layui.config({
+            base: '/layuiadmin/' //静态资源所在路径
+        }).extend({
+            index: 'lib/index' //主入口模块
+        }).use('index');
+    </script>
+    @if (IsSectionDefined("Js"))
+    {
+        @Html.Partial("_Js")
+        @RenderSection("Js", false)
+    }
+</body>
+</html>

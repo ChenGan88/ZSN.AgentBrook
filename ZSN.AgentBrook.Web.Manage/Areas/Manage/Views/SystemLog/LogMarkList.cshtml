@@ -1,0 +1,190 @@
+@{
+    int pageIndex = ViewBag.PageIndex;
+    int pageSize = ViewBag.PageSize;
+    int pageTotal = ViewBag.PageTotal;
+    int total = ViewBag.Total;
+    string keyword = ViewBag.Keyword;
+    string pageTitle = ViewBag.PageTitle;
+    var LogTypeList = ViewBag.LogTypeList as List<LogMark>;
+    var LogLevelList = ViewBag.LogLevelList as List<LogLevel>;
+    var LogMarkClassList = ViewBag.LogMarkClassList as List<LogMarkClass>;
+    var LevelId = ViewBag.LevelId;
+}
+
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>@pageTitle</legend>
+</fieldset>
+<div class="layui-row layui-form">
+    <button class="layui-btn add_bt" style="margin-right:50px;"><i class="layui-icon"></i>增加</button>
+    @if (LogLevelList != null)
+    {
+        <label>日志等级</label>
+        <div class="layui-input-inline layui-show-xs-block" style="margin-right:50px;">
+            <select name="LevelId" lay-verify="required" lay-filter="LevelId">
+                <option value="0">全部</option>
+                @foreach (var b in LogLevelList)
+                {
+                    <!option value="@b.Id" @(b.Id == LevelId ? "selected" : "")>@b.LevelName</!option>
+                }
+            </select>
+        </div>
+    }
+
+    <div class="layui-input-inline" style="width: 300px;">
+        <input type="text" name="keyword" value="@keyword" class="layui-input" placeholder="搜索日志类别">
+    </div>
+    <button class="layui-btn js-result-search">搜索</button>
+</div>
+
+<div class="layui-form">
+    <table class="layui-table">
+        <colgroup>
+            <col width="42">
+            <col width="242">
+            <col width="342">
+            <col width="30">
+            @*<col width="400">*@
+            <col width="63">
+            <col width="280">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>锚点分类</th>
+                <th>日志锚点</th>
+                <th>描述</th>
+                <th>等级</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var b in LogTypeList)
+            {
+            <tr data-lid="@b.Id">
+                <td>@b.Id</td>
+                <td>@(LogMarkClassList.FirstOrDefault(t=>t.Id ==b.ClassId)?.ClassName)</td>
+                <td>@b.MarkName</td>
+                <td>@b.MarkRemarks</td>
+                <td>@(LogLevelList.FirstOrDefault(t=>t.Id ==b.LevelId)?.LevelName)</td>
+                <td>
+                    <input type="checkbox" name="switch" lay-text="开启|停用" lay-skin="switch" lay-filter="status" @(b.Status ? "checked" : "")>
+                </td>
+                <td>
+                    <button class="layui-btn layui-btn layui-btn-xs edit_bt"><i class="layui-icon">&#xe642;</i>编辑</button>
+                </td>
+            </tr>
+            }
+            @if (LogTypeList.Count == 0)
+            {
+                <tr>
+                    <td colspan="5">暂无日志类别</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div id="pageId" class="pagination"></div>
+</div>
+
+@section Js{
+    <script>
+        layui.use(function () {
+            var laypage = layui.laypage;
+            var pageIndex = @pageIndex;
+            var pageSize = @pageSize;
+            var pageTotal = @pageTotal;
+            var total = @total;
+            var keyword = encodeURIComponent('@keyword');
+
+            var BranchID = @LevelId;
+
+            var form = layui.form;
+
+            form.render();
+
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'pageId'
+                , count: total
+                , limit: pageSize
+                , curr: pageIndex
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , jump: function (obj, f) {
+                    if (f)
+                        return;
+                    location.href = "@Url.Action("LogMarkList")?pageIndex=" + obj.curr + "&pageSize=" + obj.limit + "&keyword=" + keyword + "&LevelId=0" + "&appid=@HttpContextHelper.Request.GetParam("appid")";
+                }
+            });
+            /*用户-删除*/
+            function member_del(obj) {
+                layer.confirm('确认要删除吗？',
+                    function (index) {
+                        //发异步删除数据
+                        var bid = $(obj).parents("tr").data('bid');
+                        $.ajax({
+                            url: '@Url.Action("LogMarkDel")',
+                            type: 'POST',
+                            data: {
+                                jobPositionID: bid
+                            },
+                            success: function (res) {
+                                layer.msg('已删除!', { icon: 1, time: 1000 }, function () {
+                                    location.href = "@Url.Action("LogMarkList")?pageIndex=" + pageIndex + "&pageSize=" + pageSize + "&keyword=" + $('input[name="keyword"]').val() + "&LevelId=" + LevelId;
+                                });
+                            }
+                        });
+                    });
+            }
+
+            form.on('switch(status)',
+                function (data) {
+                    $.ajax({
+                        url: '@Url.Action("LogMarkStatus")',
+                        type: 'POST',
+                        data: {
+                            Id: $(this).parents("tr").data('lid'),
+                            status: (this.checked ? 'true' : 'false')
+                        },
+                        success: function (res) {
+                            layer.msg('已修改', { icon: 1, time: 1000 });
+                        }
+                    });
+
+                });
+
+
+            $('.js-result-search').unbind().click(function () {
+                location.href = "@Url.Action("LogMarkList")?pageIndex=" + 1 + "&pageSize=" + pageSize + "&keyword=" + $('input[name="keyword"]').val() + "&LevelId=" + $('select[name="LevelId"]').val() + "&appid=@HttpContextHelper.Request.GetParam("appid")";
+            });
+
+            /*新增*/
+            $('.add_bt').click(function () {
+                var url = '@Url.Action("LogMarkEdit")';
+                layer.open({
+                    type: 2,
+                    title: '新增',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['100%', '100%'],
+                    content: url
+                });
+            });
+            
+
+            /*编辑*/
+            $('.edit_bt').click(function () {
+                var Id = $(this).parent().parent().data('lid');
+                var url = '@Url.Action("LogMarkEdit")' + '?Id=' + Id;
+                layer.open({
+                    type: 2,
+                    title: '新增',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['100%', '100%'],
+                    content: url
+                });
+            });
+            
+        });
+    </script>
+}

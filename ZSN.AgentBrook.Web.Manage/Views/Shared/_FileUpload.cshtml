@@ -1,0 +1,258 @@
+﻿
+
+<script type="text/javascript" src="~/lib/jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="~/plugs/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="~/plugs/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="~/plugs/jQuery-File-Upload/js/jquery.fileupload.js"></script>
+
+<link rel="stylesheet" href="~/plugs/jQuery-File-Upload/css/style.css" />
+<link rel="stylesheet" href="~/plugs/jQuery-File-Upload/css/jquery.fileupload.css" />
+<link rel="stylesheet" href="~/plugs/jQuery-File-Upload/css/jquery.fileupload-ui.css" />
+<noscript>
+    <link rel="stylesheet" href="~/plugs/jQuery-File-Upload/css/jquery.fileupload-noscript.css" />
+</noscript>
+<noscript>
+    <link rel="stylesheet" href="~/plugs/jQuery-File-Upload/css/jquery.fileupload-ui-noscript.css" />
+</noscript>
+
+<link rel="stylesheet" href="~/plugs/easyCropper/cropper.css" />
+<script src="~/plugs/easyCropper/cropper.js"></script>
+<script src="~/plugs/easyCropper/easyCropper.js"></script>
+
+<script>
+    var FileUploadPluginCount = 0;
+    var FileUploadPluginAddCount = 0;
+    var FileShowPluginCount = 0;
+
+    ///编辑状态下使用
+    function FileUploadPlugin(fileUploadContainer, fileCodeElement, options) {
+
+        FileUploadPluginAddCount++;
+
+        var init = function (init_code) {
+            FileUploadPluginCount++;
+            var croppers = options.layui ? options.layui.easyCropper : null;
+            var inputId = 'fileupload-' + FileUploadPluginCount + '-' + (fileUploadContainer.find('.fileupload').length + 1);
+            var progressId = 'upload-progress-' + FileUploadPluginCount + '-' + (fileUploadContainer.find('.fileupload').length + 1);
+            var div = $('<div class="fileupload_item"></div>');
+            var fileInputElement = $('<input type="file" id="' + inputId + '" class="fileupload" name="files[]" multiple>');
+            var progressElement = $('<div class="fileupload_box" id="' + progressId + '"></div>');
+            var croppersElement = '<div class="layui-btn layui-btn-primary" id="editimg_' + inputId + '">选择图片</div>';
+
+            div.append(croppers ? croppersElement : fileInputElement);
+            div.append(progressElement);
+            fileUploadContainer.append(div);
+
+            var initShow = function (code) {
+                if (code) {
+                    var deleteButton = $('<button class="layui-btn delete ' + code + '">删除</button>').click(function () {
+                        if (fileCodeElement) {
+                            var _code = $(fileCodeElement).val().split(',').filter(item => item !== code && item !== undefined && item !== null && item !== '');
+                            _code = Array.from(new Set(_code));
+
+                            $(fileCodeElement).val(_code.join(','));
+                        }
+                        $(this).parent().parent().parent().remove();
+                    });
+                    if (options.previewType) {
+                        switch (options.previewType) {
+                            case 'img':
+                                var _src = options.previewHost.replace('{code}', code);
+                                var _div = $('<div class="fileupload_view"></div>');
+                                var _img = $('<img class="pic"></img>').attr('src', _src + '&w=' + options.previewW + '&h=' + options.previewH).click(function () { window.open(_src, '_blank'); });
+
+                                _div.append(_img);
+                                _div.append(deleteButton);
+                                _div.appendTo(progressElement);
+
+                                break;
+                            default:
+                                var _src = options.previewHost.replace('{code}', code);
+                                var _div = $('<div></div>');
+                                var _img = $('<p>' + _src+'</p>').click(function () { window.open(_src, '_blank'); });
+
+                                _div.append(_img);
+                                _div.append(deleteButton);
+                                _div.appendTo(progressElement);
+                                break;
+                        }
+                    } else {
+                        $('<p></p>').text(code).append(deleteButton).appendTo(progressElement);
+                    }
+
+                    if (fileCodeElement) {
+                        var _code = $(fileCodeElement).val() + ',' + code;
+                        _code = _code.split(',');
+                        _code = _code.filter(item => item !== undefined && item !== null && item !== '');
+                        _code = Array.from(new Set(_code));
+                        $(fileCodeElement).val(_code.join(','));
+                    }
+                }
+            };
+
+            var defaultOptions = {
+                url: 'upload.php',
+                dataType: 'json',
+                autoUpload: true,
+                previewType: '',
+                previewHost: '',
+                previewW: 100,
+                previewH: 100,
+                layui: layui,
+                formData: {},
+                progressall: function (e, data) {
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    $(progressElement).text('Uploading：' + progress + '%');
+                },
+                done: function (e, data) {
+                    $(progressElement).text('');
+                    if (data.result) {
+                        if (data.result.data.FileCode) {
+                            $.each((data.result.data.FileCode + ",").split(','), function (index, code) {
+                                initShow(code);
+                            });
+                        }
+                    }
+
+                },
+                fail: function (e, data) {
+                    $(progressElement).text('Upload failed！');
+                    console.error(data.errorThrown);
+                },
+                add: function (e, data) {
+                    data.submit();
+                }
+            };
+
+            var settings = $.extend({}, defaultOptions, options);
+
+            $(fileInputElement).fileupload(settings);
+
+            if (croppers) {
+                //创建上传组件
+                croppers.render({
+                    elem: '#editimg_' + inputId
+                    , saveW: options.setPicW
+                    , saveH: options.setPicH
+                    , mark: 1 / 1 //选取比例
+                    , area: ['90%', '80%']//弹窗宽度
+                    , url: options.url
+                    , done: function (data) {
+
+                        if (data) {
+                            if (data.data.FileCode) {
+                                $.each((data.data.FileCode + ",").split(','), function (index, code) {
+                                    initShow(code);
+                                });
+                            }
+                        }
+                    }
+                });
+            } else {
+                $(fileInputElement).fileupload(settings);
+                fileInputElement.replaceWith(fileInputElement.clone(true));
+            }
+
+
+            if (init_code) {
+                initShow(init_code);
+            }
+        };
+
+        var _add = $('<button id="add-file-upload' + FileUploadPluginAddCount + '" class="layui-btn" type="button">添加</button>').click(function () {
+            init();
+        });
+        var _addBox = $('<div class="fileupload_add"></div>').append(_add);
+
+        fileUploadContainer.before(_addBox);
+
+        var _currentVal = $(fileCodeElement).val();
+        if (_currentVal) {
+            _currentVal = _currentVal.split(',').filter(item => item !== undefined && item !== null && item !== '');
+            _currentVal = Array.from(new Set(_currentVal));
+            $.each(_currentVal, function (index, code) {
+                if (code) {
+                    init(code);
+                }
+            });
+        } else {
+            //init('');
+        }
+    }
+        //显示状态下使用
+    function FileShowPlugin(showContainer, fileCodeElement, options) {
+        FileShowPluginCount++;
+        var init = function (init_code) {
+            var showId = 'fileShow-' + FileShowPluginCount;
+
+            var div = $('<div class="' + showId + '"></div>');
+
+            showContainer.append(div);
+
+            var initShow = function (code) {
+                if (code) {
+                    if (options.previewType) {
+                        switch (options.previewType) {
+                            case 'img':
+                                var _src = options.previewHost.replace('{code}', code);
+                                var _div = $('<div class="fileupload_view"></div>');
+                                var _img = $('<img class="pic" width="' + options.previewW + '" height="' + options.previewH+'"></img>').attr('src', _src + '&w=' + options.previewW + '&h=' + options.previewH).click(function () { window.open(_src, '_blank'); });
+
+                                _div.append(_img);
+                                _div.appendTo(showContainer);
+
+                                break;
+                            default:
+                                $('<p></p>').text(code).appendTo(showContainer);
+                                break;
+                        }
+                    } else {
+                        $('<p></p>').text(code).appendTo(showContainer);
+                    }
+                }
+            };
+
+            if (init_code) {
+                initShow(init_code);
+            }
+        };
+        var _currentVal = $(fileCodeElement).val();
+        if (_currentVal) {
+            _currentVal = _currentVal.split(',').filter(item => item !== undefined && item !== null && item !== '');
+            _currentVal = Array.from(new Set(_currentVal));
+            $.each(_currentVal, function (index, code) {
+                if (code) {
+                    init(code);
+                }
+            });
+        }
+    }
+@{ 
+    /*
+    <input type="text" name="RPIC" lay-verify="required" value="" autocomplete="off" class="layui-input RPIC">
+    <div id="file-upload-container">
+    </div>
+
+    $(function () {
+            var _RPIC = function () {
+                var fileCodeElement = $('.RPIC');
+                var fileUploadContainer = $('#file-upload-container');
+
+                var options = {
+                    url: '/Controls/UploadFiles/Save',
+                    previewType: 'img',
+                    previewHost: '',
+                    previewW: 100,
+                    previewH: 100,
+                    formData: {
+                        //example: 'test'
+                    },
+                };
+
+                FileUploadPlugin(fileUploadContainer, fileCodeElement, options);
+            };
+        _RPIC();
+     });
+    */
+}
+</script>
