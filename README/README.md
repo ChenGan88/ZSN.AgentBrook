@@ -1,4 +1,4 @@
-[简体中文](https://github.com/ChenGan88/ZSN.AgentBrook/blob/main/README.md) | [English](https://github.com/ChenGan88/ZSN.AgentBrook/blob/main/README-en.md)
+[简体中文](https://github.com/ChenGan88/ZSN.AgentBrook/blob/main/README/README.md) | [English](https://github.com/ChenGan88/ZSN.AgentBrook/blob/main/README/README-en.md)
 
 **🚀 基于.NET 8使用Semantic Kernel为核心开发，支持国产信创，高效构建AI Agent 应用**
 
@@ -36,6 +36,11 @@ AgentBrook 是一款面向 AI 应用软件开发者的快速开发框架系统�
 * 使用在线大模型时，请注意调用费用，并确保预存足够余额。
 * 当选择的数据表数量较多时，系统可能会出现短暂卡顿现象，请耐心等待。
   
+***
+**💡从一个最简单的AI助手开始**
+[应用工作流](https://github.com/ChenGan88/ZSN.AgentBrook/blob/main/README/pic_001.png)
+[Agent任务工作流](https://github.com/ChenGan88/ZSN.AgentBrook/blob/main/README/pic_002.png)
+[Chat效果](https://github.com/ChenGan88/ZSN.AgentBrook/blob/main/README/pic_003.png)
 
 ***
 **💡开启AgentBrook之旅**
@@ -52,3 +57,4 @@ AgentBrook 是一款面向 AI 应用软件开发者的快速开发框架系统�
 
 **🌟 加入我们**
 AgentBrook 旨在帮助开发者快速构建、部署和维护 AI 应用程序，降低开发门槛，提高开发效率。欢迎广大开发者加入我们，共同推动 AI 产业发展！
+更多内容请访问[AgentBrook.com](https://agentbrook.com/)
