@@ -1,3 +1,5 @@
+[简体中文](https://github.com/ChenGan88/ZSN.AgentBrook/) | [English](https://github.com/ChenGan88/ZSN.AgentBrook/blob/main/README-en.md)
+
 **🚀 基于.NET 8使用Semantic Kernel为核心开发，支持国产信创，高效构建AI Agent 应用**
 
 **🔧 功能概述**
