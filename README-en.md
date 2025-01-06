@@ -1,4 +1,4 @@
-[简体中文](https://github.com/ChenGan88/ZSN.AgentBrook/) | [English](https://github.com/ChenGan88/ZSN.AgentBrook/blob/main/README-en.md)
+[简体中文](https://github.com/ChenGan88/ZSN.AgentBrook/blob/main/README.md) | [English](https://github.com/ChenGan88/ZSN.AgentBrook/blob/main/README-en.md)
 
 **🚀 Developed with Semantic Kernel at its core on .NET 8, supporting domestic information and creation, efficiently building AI Agent applications**
 
