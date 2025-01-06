@@ -36,5 +36,19 @@ AgentBrook 是一款面向 AI 应用软件开发者的快速开发框架系统�
 * 使用在线大模型时，请注意调用费用，并确保预存足够余额。
 * 当选择的数据表数量较多时，系统可能会出现短暂卡顿现象，请耐心等待。
   
+
+***
+**💡开启AgentBrook之旅**
+1. **准备工作**
+    * **数据库**：系统默认使用了MySQL:8，Postgres:16.6+pgvector，Redis:5.0.10，可以修改项目appsettings.json文件的DbConnectionStrings。
+    可能看到DbConnectionStrings你会吓一跳，怎么会有那么多数据库，在意的话可以把MySQL的数据库合并到一起。其它参数根据自己实际情况修改调整即可。
+    * **大模型**：应为使用的是Semantic Kernel，极大程度方便了大模型接入，理论上支持各类兼容OpenAI接口的大模型。
+    * **账号密码**：使用SQL建库会自动添加好一个管理员账号：admin，密码：1q2w3e
+
+**💕 感谢**
+    感谢[Semantic Kernel](https://github.com/microsoft/semantic-kernel),提供了一个强大好用的框架。
+    感谢[AntSK](https://github.com/AIDotNet/AntSK)，项目初期学习参考了AntSK对Semantic Kernel的使用。
+
+
 **🌟 加入我们**
 AgentBrook 旨在帮助开发者快速构建、部署和维护 AI 应用程序，降低开发门槛，提高开发效率。欢迎广大开发者加入我们，共同推动 AI 产业发展！
