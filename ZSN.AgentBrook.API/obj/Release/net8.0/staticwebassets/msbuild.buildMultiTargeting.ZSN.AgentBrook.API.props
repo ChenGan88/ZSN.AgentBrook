@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ZSN.AgentBrook.API.props" />
+</Project>

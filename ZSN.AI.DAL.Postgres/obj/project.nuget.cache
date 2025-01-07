@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9/DKleVLKcc=",
+  "dgSpecHash": "UK3Aa8A4msc=",
   "success": true,
-  "projectFilePath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj",
+  "projectFilePath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chengan\\.nuget\\packages\\azure.core\\1.41.0\\azure.core.1.41.0.nupkg.sha512",
     "C:\\Users\\chengan\\.nuget\\packages\\azure.storage.blobs\\12.21.2\\azure.storage.blobs.12.21.2.nupkg.sha512",

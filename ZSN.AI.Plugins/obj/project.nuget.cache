@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zVgiOSaPeZI=",
+  "dgSpecHash": "PPakI2b8T/U=",
   "success": true,
-  "projectFilePath": "W:\\AI\\ZSN.AI\\ZSN.AI.Plugins\\ZSN.AI.Plugins.csproj",
+  "projectFilePath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Plugins\\ZSN.AI.Plugins.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chengan\\.nuget\\packages\\azure.ai.openai\\2.1.0-beta.2\\azure.ai.openai.2.1.0-beta.2.nupkg.sha512",
     "C:\\Users\\chengan\\.nuget\\packages\\azure.core\\1.44.1\\azure.core.1.44.1.nupkg.sha512",

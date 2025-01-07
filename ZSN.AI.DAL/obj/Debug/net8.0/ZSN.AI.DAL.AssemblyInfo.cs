@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZSN.AI.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+208d6b382ec8def067afe017118ee673dd05bbc8")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZSN.AI.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZSN.AI.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

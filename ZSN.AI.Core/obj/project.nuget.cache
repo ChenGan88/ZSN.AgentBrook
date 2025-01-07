@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BH1UuU1hS1Q=",
+  "dgSpecHash": "JZD37YhRv/o=",
   "success": true,
-  "projectFilePath": "W:\\AI\\ZSN.AI\\ZSN.AI.Core\\ZSN.AI.Core.csproj",
+  "projectFilePath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Core\\ZSN.AI.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chengan\\.nuget\\packages\\awssdk.core\\3.7.400.43\\awssdk.core.3.7.400.43.nupkg.sha512",
     "C:\\Users\\chengan\\.nuget\\packages\\awssdk.s3\\3.7.405.7\\awssdk.s3.3.7.405.7.nupkg.sha512",

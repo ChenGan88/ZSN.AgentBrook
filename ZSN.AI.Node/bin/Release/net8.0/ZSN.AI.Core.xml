@@ -274,7 +274,7 @@
             部署名，azure需要使用
             </summary>
         </member>
-        <member name="M:ZSN.AI.Core.Service.ChatService.SendChatAsync(ZSN.XinLing.Entity.LargeModelConfig,Microsoft.SemanticKernel.ChatCompletion.ChatHistory,ZSN.XinLing.Entity.CallFunction)">
+        <member name="M:ZSN.AI.Core.Service.ChatService.SendChatAsync(ZSN.AI.Entity.LargeModelConfig,Microsoft.SemanticKernel.ChatCompletion.ChatHistory,ZSN.AI.Entity.CallFunction)">
             <summary>
             发送消息
             </summary>
@@ -283,7 +283,7 @@
             <param name="Function"></param>
             <returns></returns>
         </member>
-        <member name="M:ZSN.AI.Core.Service.ChatService.SendKmsAsync(System.Collections.Generic.List{ZSN.XinLing.Entity.KnowledgeBaseUnit},ZSN.XinLing.Entity.LargeModelConfig,System.String,Microsoft.SemanticKernel.ChatCompletion.ChatHistory)">
+        <member name="M:ZSN.AI.Core.Service.ChatService.SendKmsAsync(System.Collections.Generic.List{ZSN.AI.Entity.KnowledgeBaseUnit},ZSN.AI.Entity.LargeModelConfig,System.String,Microsoft.SemanticKernel.ChatCompletion.ChatHistory)">
             <summary>
             通过多个知识库获取提问的相关内容，并根据对话记录重新组织返回
             </summary>
@@ -293,7 +293,7 @@
             <param name="history"></param>
             <returns></returns>
         </member>
-        <member name="M:ZSN.AI.Core.Service.ChatService.GetChatHistory(System.Collections.Generic.List{ZSN.XinLing.Entity.AppChatLogInfo},Microsoft.SemanticKernel.ChatCompletion.ChatHistory)">
+        <member name="M:ZSN.AI.Core.Service.ChatService.GetChatHistory(System.Collections.Generic.List{ZSN.AI.Entity.AppChatLogInfo},Microsoft.SemanticKernel.ChatCompletion.ChatHistory)">
             <summary>
             组织会话记录
             </summary>
@@ -306,7 +306,7 @@
             查询程序集中的方法委托，后续利用Source Generators生成
             </summary>
         </member>
-        <member name="M:ZSN.AI.Core.Service.KernelService.GetKernel(ZSN.XinLing.Entity.LargeModelInfo)">
+        <member name="M:ZSN.AI.Core.Service.KernelService.GetKernel(ZSN.AI.Entity.LargeModelInfo)">
             <summary>
             获取kernel实例，依赖注入不好按每个用户去Import不同的插件，所以每次new一个新的kernel
             </summary>
@@ -314,14 +314,14 @@
             <param name="apiKey"></param>
             <returns></returns>
         </member>
-        <member name="M:ZSN.AI.Core.Service.KernelService.ImportFunctions(ZSN.XinLing.Entity.LargeModelConfig,Microsoft.SemanticKernel.Kernel)">
+        <member name="M:ZSN.AI.Core.Service.KernelService.ImportFunctions(ZSN.AI.Entity.LargeModelConfig,Microsoft.SemanticKernel.Kernel)">
             <summary>
             根据app配置的插件，导入插件
             </summary>
             <param name="app"></param>
             <param name="_kernel"></param>
         </member>
-        <member name="M:ZSN.AI.Core.Service.KernelService.ImportNativeFunction(ZSN.XinLing.Entity.LargeModelConfig,System.Collections.Generic.List{Microsoft.SemanticKernel.KernelFunction})">
+        <member name="M:ZSN.AI.Core.Service.KernelService.ImportNativeFunction(ZSN.AI.Entity.LargeModelConfig,System.Collections.Generic.List{Microsoft.SemanticKernel.KernelFunction})">
             <summary>
             导入原生插件
             </summary>

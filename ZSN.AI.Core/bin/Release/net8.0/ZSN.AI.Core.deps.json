@@ -22,9 +22,9 @@
           "Newtonsoft.Json": "13.0.3",
           "RestSharp": "111.4.1",
           "SqlSugarCore": "5.1.4.167",
+          "ZSN.AI.BLL": "1.0.0",
           "ZSN.AI.Plugins": "1.0.0",
           "ZSN.Utils.Core": "1.0.0",
-          "ZSN.XinLing.BLL": "1.0.0",
           "pythonnet": "3.0.3"
         },
         "runtime": {
@@ -4361,11 +4361,49 @@
           }
         }
       },
+      "ZSN.AI.BLL/1.0.0": {
+        "dependencies": {
+          "ZSN.AI.DAL": "1.0.0",
+          "ZSN.AI.Entity": "1.0.0",
+          "ZSN.Utils.Core": "1.0.0"
+        },
+        "runtime": {
+          "ZSN.AI.BLL.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ZSN.AI.DAL/1.0.0": {
+        "dependencies": {
+          "MySql.Data": "8.0.33",
+          "Npgsql": "9.0.2",
+          "ZSN.AI.Entity": "1.0.0",
+          "ZSN.Utils.Core": "1.0.0"
+        },
+        "runtime": {
+          "ZSN.AI.DAL.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ZSN.AI.Entity/1.0.0": {
+        "dependencies": {
+          "ZSN.Utils.Core": "1.0.0"
+        },
+        "runtime": {
+          "ZSN.AI.Entity.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "ZSN.AI.Plugins/1.0.0": {
         "dependencies": {
           "Microsoft.SemanticKernel": "1.29.0",
-          "ZSN.Utils.Core": "1.0.0",
-          "ZSN.XinLing.BLL": "1.0.0"
+          "ZSN.AI.BLL": "1.0.0",
+          "ZSN.Utils.Core": "1.0.0"
         },
         "runtime": {
           "ZSN.AI.Plugins.dll": {
@@ -4398,72 +4436,6 @@
         },
         "runtime": {
           "ZSN.Utils.Core.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "ZSN.XinLing.BLL/1.0.0": {
-        "dependencies": {
-          "ZSN.Utils.Core": "1.0.0",
-          "ZSN.XinLing.DAL": "1.0.0",
-          "ZSN.XinLing.DAL.MySql": "1.0.0",
-          "ZSN.XinLing.DAL.Postgres": "1.0.0",
-          "ZSN.XinLing.Entity": "1.0.0"
-        },
-        "runtime": {
-          "ZSN.XinLing.BLL.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "ZSN.XinLing.DAL/1.0.0": {
-        "dependencies": {
-          "MySql.Data": "8.0.33",
-          "Npgsql": "9.0.2",
-          "ZSN.Utils.Core": "1.0.0",
-          "ZSN.XinLing.Entity": "1.0.0"
-        },
-        "runtime": {
-          "ZSN.XinLing.DAL.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "ZSN.XinLing.DAL.MySql/1.0.0": {
-        "dependencies": {
-          "MySql.Data": "8.0.33",
-          "ZSN.XinLing.DAL": "1.0.0",
-          "ZSN.XinLing.Entity": "1.0.0"
-        },
-        "runtime": {
-          "ZSN.XinLing.DAL.MySql.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "ZSN.XinLing.DAL.Postgres/1.0.0": {
-        "dependencies": {
-          "Npgsql": "9.0.2",
-          "ZSN.XinLing.DAL": "1.0.0",
-          "ZSN.XinLing.Entity": "1.0.0"
-        },
-        "runtime": {
-          "ZSN.XinLing.DAL.Postgres.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "ZSN.XinLing.Entity/1.0.0": {
-        "dependencies": {
-          "ZSN.Utils.Core": "1.0.0"
-        },
-        "runtime": {
-          "ZSN.XinLing.Entity.dll": {
             "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -7030,37 +7002,27 @@
       "serviceable": false,
       "sha512": ""
     },
+    "ZSN.AI.BLL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ZSN.AI.DAL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ZSN.AI.Entity/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "ZSN.AI.Plugins/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
     "ZSN.Utils.Core/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "ZSN.XinLing.BLL/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "ZSN.XinLing.DAL/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "ZSN.XinLing.DAL.MySql/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "ZSN.XinLing.DAL.Postgres/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "ZSN.XinLing.Entity/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

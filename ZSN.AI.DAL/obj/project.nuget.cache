@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MZ86uO3xb7g=",
+  "dgSpecHash": "QO8CfFOeoNU=",
   "success": true,
-  "projectFilePath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj",
+  "projectFilePath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chengan\\.nuget\\packages\\azure.core\\1.41.0\\azure.core.1.41.0.nupkg.sha512",
     "C:\\Users\\chengan\\.nuget\\packages\\azure.storage.blobs\\12.21.2\\azure.storage.blobs.12.21.2.nupkg.sha512",
