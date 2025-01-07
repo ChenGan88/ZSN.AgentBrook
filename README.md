@@ -16,6 +16,8 @@ AgentBrook 是一款面向 AI 应用软件开发者的快速开发框架系统�
 
 **🖥️ 部署环境**
 * 操作系统: Windows、Linux、Mac
+* Docker: 直接在[publish](https://github.com/ChenGan88/ZSN.AgentBrook/tree/main/publish)下运行：docker-compose up --build
+* 账号：**admin**，密码：**1q2w3e**
 
 **📦 使用说明**
 1. **系统部署**: 根据部署环境选择发布版本类型，运行发布后的文件即可。
@@ -51,10 +53,12 @@ AgentBrook 是一款面向 AI 应用软件开发者的快速开发框架系统�
     * **账号密码**：使用SQL建库会自动添加好一个管理员账号：admin，密码：1q2w3e
 
 **💕 感谢**
+
     感谢[Semantic Kernel](https://github.com/microsoft/semantic-kernel),提供了一个强大好用的框架。
     感谢[AntSK](https://github.com/AIDotNet/AntSK)，项目初期学习参考了AntSK对Semantic Kernel的使用。
 
 
 **🌟 加入我们**
+
 AgentBrook 旨在帮助开发者快速构建、部署和维护 AI 应用程序，降低开发门槛，提高开发效率。欢迎广大开发者加入我们，共同推动 AI 产业发展！
 更多内容请访问[AgentBrook.com](https://agentbrook.com/)
