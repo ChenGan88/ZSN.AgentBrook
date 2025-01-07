@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "25UzOYnlRCs=",
+  "dgSpecHash": "38o7JJujaYo=",
   "success": true,
-  "projectFilePath": "W:\\AI\\ZSN.AI\\ZSN.AI.LLMServer\\ZSN.AI.LLMServer.csproj",
+  "projectFilePath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.LLMServer\\ZSN.AI.LLMServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chengan\\.nuget\\packages\\awssdk.core\\3.7.400.43\\awssdk.core.3.7.400.43.nupkg.sha512",
     "C:\\Users\\chengan\\.nuget\\packages\\awssdk.s3\\3.7.405.7\\awssdk.s3.3.7.405.7.nupkg.sha512",

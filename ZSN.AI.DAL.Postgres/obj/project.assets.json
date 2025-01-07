@@ -11867,11 +11867,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj",
+      "projectUniqueName": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj",
       "projectName": "ZSN.AI.DAL.Postgres",
-      "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj",
+      "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj",
       "packagesPath": "C:\\Users\\chengan\\.nuget\\packages\\",
-      "outputPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.Postgres\\obj\\",
+      "outputPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.Postgres\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -11892,8 +11892,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj": {
-              "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj"
+            "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj": {
+              "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj"
             }
           }
         }

@@ -1,0 +1,60 @@
+============================
+Time:2025-01-07 19:50:56.610
+时间：2025-01-07 19:50:56.6096842,
+SQL：select Id,MarkName,MarkRemarks,ClassId,LevelId,Status,CreateTime,UpdateTime from log_mark where Id=@Id limit 1.
+
+
+============================
+Time:2025-01-07 19:50:56.610
+时间：2025-01-07 19:50:56.6096489,
+SQL：select TaskID,TaskType,TaskConfig,CreateTime,UpdateTime,State,Results,LoopType,IntervalValue,RepeatValue,RedoCount,FromTaskID,FromMainTaskID  FROM tb_task_info where State=@State and TaskType in(1,11,2,12,3,9,10,4,6,5) and CreateTime<=@StartTime order by CreateTime ASC limit @length ; update tb_task_info set State=@ToState  where State=@State and TaskType in(1,11,2,12,3,9,10,4,6,5) and CreateTime<=@StartTime order by CreateTime ASC limit @length ;.
+
+
+============================
+Time:2025-01-07 19:50:56.649
+时间：2025-01-07 19:50:56.6489965,
+SQL：select Id,LevelName,LevelRemarks,Status,CreateTime,UpdateTime from log_level where Id=@Id limit 1.
+
+
+============================
+Time:2025-01-07 19:50:56.653
+时间：2025-01-07 19:50:56.6535870,
+SQL：insert into log_record (MarkId,LevelId,LogDetail,LogRemarks,LogUrl,LogCreatorId,LogCreatorIP,OperateTime,DateCode,CreateTime,UpdateTime) values (@MarkId,@LevelId,@LogDetail,@LogRemarks,@LogUrl,@LogCreatorId,@LogCreatorIP,@OperateTime,@DateCode,@CreateTime,@UpdateTime);select @@IDENTITY.
+
+
+============================
+Time:2025-01-07 19:50:56.662
+时间：2025-01-07 19:50:56.6628854,
+SQL：select Id,MarkName,MarkRemarks,ClassId,LevelId,Status,CreateTime,UpdateTime from log_mark where Id=@Id limit 1.
+
+
+============================
+Time:2025-01-07 19:50:56.664
+时间：2025-01-07 19:50:56.6642563,
+SQL：select Id,LevelName,LevelRemarks,Status,CreateTime,UpdateTime from log_level where Id=@Id limit 1.
+
+
+============================
+Time:2025-01-07 19:50:56.665
+时间：2025-01-07 19:50:56.6654837,
+SQL：insert into log_record (MarkId,LevelId,LogDetail,LogRemarks,LogUrl,LogCreatorId,LogCreatorIP,OperateTime,DateCode,CreateTime,UpdateTime) values (@MarkId,@LevelId,@LogDetail,@LogRemarks,@LogUrl,@LogCreatorId,@LogCreatorIP,@OperateTime,@DateCode,@CreateTime,@UpdateTime);select @@IDENTITY.
+
+
+============================
+Time:2025-01-07 19:50:57.276
+时间：2025-01-07 19:50:57.2765166,
+SQL：select TaskID,TaskType,TaskConfig,CreateTime,UpdateTime,State,Results,LoopType,IntervalValue,RepeatValue,RedoCount,FromTaskID,FromMainTaskID  FROM tb_task_info where State=@State and TaskType=@TaskType and CreateTime<=@StartTime order by CreateTime ASC limit @length ; update tb_task_info set State=@ToState  where State=@State and TaskType=@TaskType and CreateTime<=@StartTime order by CreateTime ASC limit @length ;.
+
+
+============================
+Time:2025-01-07 19:50:57.283
+时间：2025-01-07 19:50:57.2836590,
+SQL：select TaskID,TaskType,TaskConfig,CreateTime,UpdateTime,State,Results,LoopType,IntervalValue,RepeatValue,RedoCount,FromTaskID,FromMainTaskID  FROM tb_task_info where State=@State and TaskType in(1,11,2,12,3,9,10,4,6,5) and CreateTime<=@StartTime order by CreateTime ASC limit @length ; update tb_task_info set State=@ToState  where State=@State and TaskType in(1,11,2,12,3,9,10,4,6,5) and CreateTime<=@StartTime order by CreateTime ASC limit @length ;.
+
+
+============================
+Time:2025-01-07 19:50:57.298
+时间：2025-01-07 19:50:57.2984216,
+SQL：select TaskID,TaskType,TaskConfig,CreateTime,UpdateTime,State,Results,LoopType,IntervalValue,RepeatValue,RedoCount,FromTaskID,FromMainTaskID  FROM tb_task_info where State=@State and TaskType in(90) and CreateTime<=@StartTime order by CreateTime ASC limit @length ; update tb_task_info set State=@ToState  where State=@State and TaskType in(90) and CreateTime<=@StartTime order by CreateTime ASC limit @length ;.
+
+

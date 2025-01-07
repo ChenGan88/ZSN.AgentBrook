@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "W:\\AI\\ZSN.AI\\ZSN.AgentBrook.API\\ZSN.AgentBrook.API.csproj": {}
+    "W:\\AI\\ZSN.AI.Community\\ZSN.AgentBrook.API\\ZSN.AgentBrook.API.csproj": {}
   },
   "projects": {
-    "W:\\AI\\ZSN.AI\\LitJSON\\LitJSON.csproj": {
+    "W:\\AI\\ZSN.AI.Community\\LitJSON\\LitJSON.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "W:\\AI\\ZSN.AI\\LitJSON\\LitJSON.csproj",
+        "projectUniqueName": "W:\\AI\\ZSN.AI.Community\\LitJSON\\LitJSON.csproj",
         "projectName": "LitJSON",
-        "projectPath": "W:\\AI\\ZSN.AI\\LitJSON\\LitJSON.csproj",
+        "projectPath": "W:\\AI\\ZSN.AI.Community\\LitJSON\\LitJSON.csproj",
         "packagesPath": "C:\\Users\\chengan\\.nuget\\packages\\",
-        "outputPath": "W:\\AI\\ZSN.AI\\LitJSON\\obj\\",
+        "outputPath": "W:\\AI\\ZSN.AI.Community\\LitJSON\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -68,14 +68,14 @@
         }
       }
     },
-    "W:\\AI\\ZSN.AI\\ZSN.AgentBrook.API\\ZSN.AgentBrook.API.csproj": {
+    "W:\\AI\\ZSN.AI.Community\\ZSN.AgentBrook.API\\ZSN.AgentBrook.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "W:\\AI\\ZSN.AI\\ZSN.AgentBrook.API\\ZSN.AgentBrook.API.csproj",
+        "projectUniqueName": "W:\\AI\\ZSN.AI.Community\\ZSN.AgentBrook.API\\ZSN.AgentBrook.API.csproj",
         "projectName": "ZSN.AgentBrook.API",
-        "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AgentBrook.API\\ZSN.AgentBrook.API.csproj",
+        "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AgentBrook.API\\ZSN.AgentBrook.API.csproj",
         "packagesPath": "C:\\Users\\chengan\\.nuget\\packages\\",
-        "outputPath": "W:\\AI\\ZSN.AI\\ZSN.AgentBrook.API\\obj\\",
+        "outputPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AgentBrook.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -96,26 +96,26 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "W:\\AI\\ZSN.AI\\ZSN.AI.BLL\\ZSN.AI.BLL.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.BLL\\ZSN.AI.BLL.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.BLL\\ZSN.AI.BLL.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.BLL\\ZSN.AI.BLL.csproj"
               },
-              "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.MySql\\ZSN.AI.DAL.MySql.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.MySql\\ZSN.AI.DAL.MySql.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.MySql\\ZSN.AI.DAL.MySql.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.MySql\\ZSN.AI.DAL.MySql.csproj"
               },
-              "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj"
               },
-              "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj"
               },
-              "W:\\AI\\ZSN.AI\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj"
               },
-              "W:\\AI\\ZSN.AI\\ZSN.AI.Service\\ZSN.AI.Service.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.Service\\ZSN.AI.Service.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Service\\ZSN.AI.Service.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Service\\ZSN.AI.Service.csproj"
               },
-              "W:\\AI\\ZSN.AI\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj"
               }
             }
           }
@@ -179,14 +179,14 @@
         }
       }
     },
-    "W:\\AI\\ZSN.AI\\ZSN.AI.BLL\\ZSN.AI.BLL.csproj": {
+    "W:\\AI\\ZSN.AI.Community\\ZSN.AI.BLL\\ZSN.AI.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "W:\\AI\\ZSN.AI\\ZSN.AI.BLL\\ZSN.AI.BLL.csproj",
+        "projectUniqueName": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.BLL\\ZSN.AI.BLL.csproj",
         "projectName": "ZSN.AI.BLL",
-        "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.BLL\\ZSN.AI.BLL.csproj",
+        "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.BLL\\ZSN.AI.BLL.csproj",
         "packagesPath": "C:\\Users\\chengan\\.nuget\\packages\\",
-        "outputPath": "W:\\AI\\ZSN.AI\\ZSN.AI.BLL\\obj\\",
+        "outputPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.BLL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -207,14 +207,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj"
               },
-              "W:\\AI\\ZSN.AI\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj"
               },
-              "W:\\AI\\ZSN.AI\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj"
               }
             }
           }
@@ -253,14 +253,14 @@
         }
       }
     },
-    "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.MySql\\ZSN.AI.DAL.MySql.csproj": {
+    "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.MySql\\ZSN.AI.DAL.MySql.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.MySql\\ZSN.AI.DAL.MySql.csproj",
+        "projectUniqueName": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.MySql\\ZSN.AI.DAL.MySql.csproj",
         "projectName": "ZSN.AI.DAL.MySql",
-        "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.MySql\\ZSN.AI.DAL.MySql.csproj",
+        "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.MySql\\ZSN.AI.DAL.MySql.csproj",
         "packagesPath": "C:\\Users\\chengan\\.nuget\\packages\\",
-        "outputPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.MySql\\obj\\",
+        "outputPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.MySql\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -281,11 +281,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj"
               },
-              "W:\\AI\\ZSN.AI\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj"
               }
             }
           }
@@ -330,14 +330,14 @@
         }
       }
     },
-    "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj": {
+    "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj",
+        "projectUniqueName": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj",
         "projectName": "ZSN.AI.DAL.Postgres",
-        "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj",
+        "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.Postgres\\ZSN.AI.DAL.Postgres.csproj",
         "packagesPath": "C:\\Users\\chengan\\.nuget\\packages\\",
-        "outputPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL.Postgres\\obj\\",
+        "outputPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL.Postgres\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -358,8 +358,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj"
               }
             }
           }
@@ -404,14 +404,14 @@
         }
       }
     },
-    "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj": {
+    "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj",
+        "projectUniqueName": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj",
         "projectName": "ZSN.AI.DAL",
-        "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj",
+        "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj",
         "packagesPath": "C:\\Users\\chengan\\.nuget\\packages\\",
-        "outputPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\obj\\",
+        "outputPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -432,11 +432,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "W:\\AI\\ZSN.AI\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj"
               },
-              "W:\\AI\\ZSN.AI\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj"
               }
             }
           }
@@ -485,14 +485,14 @@
         }
       }
     },
-    "W:\\AI\\ZSN.AI\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj": {
+    "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "W:\\AI\\ZSN.AI\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj",
+        "projectUniqueName": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj",
         "projectName": "ZSN.AI.Entity",
-        "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj",
+        "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj",
         "packagesPath": "C:\\Users\\chengan\\.nuget\\packages\\",
-        "outputPath": "W:\\AI\\ZSN.AI\\ZSN.AI.Entity\\obj\\",
+        "outputPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Entity\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -513,8 +513,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "W:\\AI\\ZSN.AI\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj"
               }
             }
           }
@@ -553,14 +553,14 @@
         }
       }
     },
-    "W:\\AI\\ZSN.AI\\ZSN.AI.Service\\ZSN.AI.Service.csproj": {
+    "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Service\\ZSN.AI.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "W:\\AI\\ZSN.AI\\ZSN.AI.Service\\ZSN.AI.Service.csproj",
+        "projectUniqueName": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Service\\ZSN.AI.Service.csproj",
         "projectName": "ZSN.AI.Service",
-        "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.Service\\ZSN.AI.Service.csproj",
+        "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Service\\ZSN.AI.Service.csproj",
         "packagesPath": "C:\\Users\\chengan\\.nuget\\packages\\",
-        "outputPath": "W:\\AI\\ZSN.AI\\ZSN.AI.Service\\obj\\",
+        "outputPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -581,17 +581,17 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "W:\\AI\\ZSN.AI\\ZSN.AI.BLL\\ZSN.AI.BLL.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.BLL\\ZSN.AI.BLL.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.BLL\\ZSN.AI.BLL.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.BLL\\ZSN.AI.BLL.csproj"
               },
-              "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.DAL\\ZSN.AI.DAL.csproj"
               },
-              "W:\\AI\\ZSN.AI\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.AI.Entity\\ZSN.AI.Entity.csproj"
               },
-              "W:\\AI\\ZSN.AI\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj"
+              "W:\\AI\\ZSN.AI.Community\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj"
               }
             }
           }
@@ -644,14 +644,14 @@
         }
       }
     },
-    "W:\\AI\\ZSN.AI\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj": {
+    "W:\\AI\\ZSN.AI.Community\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "W:\\AI\\ZSN.AI\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj",
+        "projectUniqueName": "W:\\AI\\ZSN.AI.Community\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj",
         "projectName": "ZSN.Utils.Core",
-        "projectPath": "W:\\AI\\ZSN.AI\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj",
+        "projectPath": "W:\\AI\\ZSN.AI.Community\\ZSN.Utils.Core\\ZSN.Utils.Core.csproj",
         "packagesPath": "C:\\Users\\chengan\\.nuget\\packages\\",
-        "outputPath": "W:\\AI\\ZSN.AI\\ZSN.Utils.Core\\obj\\",
+        "outputPath": "W:\\AI\\ZSN.AI.Community\\ZSN.Utils.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -672,8 +672,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "W:\\AI\\ZSN.AI\\LitJSON\\LitJSON.csproj": {
-                "projectPath": "W:\\AI\\ZSN.AI\\LitJSON\\LitJSON.csproj"
+              "W:\\AI\\ZSN.AI.Community\\LitJSON\\LitJSON.csproj": {
+                "projectPath": "W:\\AI\\ZSN.AI.Community\\LitJSON\\LitJSON.csproj"
               }
             }
           }
