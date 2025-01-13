@@ -53,7 +53,7 @@ namespace ZSN.AI.Core.Service
             var temperature = ModelConfig.Temperature / 100;
             var topP = ModelConfig.TopPCoefficient / 100;
 
-            OpenAIPromptExecutionSettings settings = new() { Temperature = temperature, TopP = topP };
+            OpenAIPromptExecutionSettings settings = new() { Temperature = temperature, TopP = topP,FrequencyPenalty=1 };
 
             List<string> completionList = new List<string>();
             if (ModelConfig.SemanticFunction.Count>0 || ModelConfig.NativeFunction.Count>0 || Function!=null)
@@ -74,8 +74,12 @@ namespace ZSN.AI.Core.Service
                         Console.WriteLine("  - prompt function: " + function.Name);
                     }
                 }
-                settings.ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions;// ToolCallBehavior.EnableKernelFunctions;
-                while (true)
+                settings.ToolCallBehavior =  ToolCallBehavior.AutoInvokeKernelFunctions;// ToolCallBehavior.EnableKernelFunctions;
+
+
+                Console.WriteLine("SendChatAsync");
+
+                //while (true)
                 {
                     ChatMessageContent result = await chat.GetChatMessageContentAsync(history, settings, _kernel);
                     if (!result.Content.IsNullOrEmpty())
@@ -86,9 +90,9 @@ namespace ZSN.AI.Core.Service
                         {
                             yield return content.ConvertToString();
                         }
-                        break;
+                        //break;
                     }
-
+                    /*
                     history.Add(result);
 
                     IEnumerable<FunctionCallContent> functionCalls = FunctionCallContent.GetFunctionCalls(result);
@@ -110,6 +114,7 @@ namespace ZSN.AI.Core.Service
                             history.Add(new FunctionResultContent(functionCall, ex).ToChatMessage());
                         }
                     }
+                    */
                 }
             }
             else
@@ -404,7 +409,7 @@ namespace ZSN.AI.Core.Service
 
             OpenAIPromptExecutionSettings settings = new() { Temperature = temperature, TopP = topP };
             List<string> completionList = new List<string>();
-            settings.ToolCallBehavior = ToolCallBehavior.EnableKernelFunctions;
+            settings.ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions;// ToolCallBehavior.EnableKernelFunctions;
 
             var history = new ChatHistory();
             history.AddSystemMessage(callFunction.Prompt);
@@ -425,7 +430,7 @@ namespace ZSN.AI.Core.Service
                 }
 
                 history.Add(result);
-
+                /*
                 IEnumerable<FunctionCallContent> functionCalls = FunctionCallContent.GetFunctionCalls(result);
                 if (!functionCalls.Any())
                 {
@@ -445,6 +450,7 @@ namespace ZSN.AI.Core.Service
                         history.Add(new FunctionResultContent(functionCall, ex).ToChatMessage());
                     }
                 }
+                */
             }
 
         }

@@ -10,12 +10,13 @@ using ZSN.AI.Node;
 using ZSN.AI.BLL;
 using ZSN.AI.Entity;
 using ZSN.AI.Service.WebHelpers;
+using Newtonsoft.Json;
 
 namespace ZSN.AgentBrook.AutoJob
 {
     public class NodeJob : JobBase, IJob
     {
-
+        private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
         private readonly IChatService _chatService;
         public NodeJob(IChatService chatService) { 
             _chatService = chatService;
@@ -33,7 +34,16 @@ namespace ZSN.AgentBrook.AutoJob
             {
                 //获取需要AI执行的任务
                 List<NodeType> nodeTypes = new List<NodeType>() { NodeType.Start, NodeType.AgentStart, NodeType.End, NodeType.AgentEnd, NodeType.LargeModel, NodeType.Agent, NodeType.Plugins, NodeType.MainAI, NodeType.Selector, NodeType.KnowledgeBase };
-                List<TaskInfo> tasks = TaskInfoBussiness.GetList(0, nodeTypes, DateTime.Now, 1, 100);
+                List<TaskInfo> tasks = null;
+                await _semaphore.WaitAsync();
+                try
+                {
+                    tasks = TaskInfoBussiness.GetList(0, nodeTypes, DateTime.Now, 1, 100);
+                }
+                finally
+                {
+                    _semaphore.Release();
+                }
 
                 if (tasks != null && tasks.Count > 0)
                 {
@@ -58,6 +68,7 @@ namespace ZSN.AgentBrook.AutoJob
 
         private async Task AIWorkerAsync_Node(TaskInfo task)
         {
+            DefaultLogService.AddOperationLog(ErrorId, JsonConvert.SerializeObject(task));
             TaskConfig taskConfig = task.TaskConfig;
             task.Results = new Results();
             try
