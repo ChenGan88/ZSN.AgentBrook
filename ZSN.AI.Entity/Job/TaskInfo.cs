@@ -127,4 +127,9 @@ namespace ZSN.AI.Entity
 
         public ImportKMSTaskReq ImportKMSTask { get; set; }
     }
+
+    public partial class AgentNode_return
+    {
+        public List<string> AgentNodeID { get; set; }
+    }
 }

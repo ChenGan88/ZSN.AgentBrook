@@ -60,13 +60,8 @@ namespace ZSN.AI.Core.Service
                 .WithOllamaTextEmbeddingGeneration(config, new CL100KTokenizer())
                 .Build();
             
-            //var memoryBuild = new KernelMemoryBuilder();
-            //WithTextEmbeddingGenerationByAIType(memoryBuild, ModelConfig.Model, embeddingHttpClient);
-            //var memory = memoryBuild.Build();
 
             yield return await memory.ImportTextAsync(questions);
-
-
         }
 
         public MemoryServerless GetMemory(LargeModelUnit ModelUnit,string KnowledgeBaseID)

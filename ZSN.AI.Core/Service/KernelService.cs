@@ -79,30 +79,13 @@ namespace ZSN.AI.Core.Service
             
             switch (chatModel.ModelOrganizationID)
             {
-                /*
-                case (int)ZSN.AI.Entity.Model.Enum.AIType.OpenAI:
+                
+                case ZSN.AI.Entity.Model.Enum.AIType.OpenAI:
                     builder.AddOpenAIChatCompletion(
                        modelId: chatModel.ModelName,
                        apiKey: chatModel.ModelKey,
                        httpClient: chatHttpClient);
                     break;
-
-                case (int)ZSN.AI.Entity.Model.Enum.AIType.AzureOpenAI:
-                    builder.AddAzureOpenAIChatCompletion(
-                        deploymentName: chatModel.ModelName,
-                        apiKey: chatModel.ModelKey,
-                        endpoint: chatModel.EndPoint
-                        );
-                    break;
-
-                case (int)ZSN.AI.Entity.Model.Enum.AIType.LLamaFactory:
-                    builder.AddOpenAIChatCompletion(
-                     modelId: chatModel.ModelName,
-                     apiKey: "NotNull",
-                     httpClient: chatHttpClient
-                       );
-                    break;
-                */
                 case ZSN.AI.Entity.Model.Enum.AIType.Ollama:
                     
                     builder.AddOpenAIChatCompletion(
