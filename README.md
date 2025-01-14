@@ -1,5 +1,7 @@
 [简体中文](https://github.com/ChenGan88/ZSN.AgentBrook/blob/main/README.md) | [English](https://github.com/ChenGan88/ZSN.AgentBrook/blob/main/README/README-en.md)
 
+* * *
+
 **🚀 基于.NET 8使用Semantic Kernel为核心开发，支持国产信创，高效构建AI Agent 应用**
 
 **🔧 功能概述**
@@ -14,14 +16,26 @@ AgentBrook 是一款面向 AI 应用软件开发者的快速开发框架系统�
 * **系统助手**: 提供示例系统助手，方便开发者参考配置，快速构建功能完善的 AI 应用。
 * **开发日志管理**: 方便开发者预埋日志提取点位，查看运行日志信息，进行调试和监控。
 
-**🖥️ 部署环境**
-* 操作系统: Windows、Linux、Mac
-* Docker: 直接在[publish](https://github.com/ChenGan88/ZSN.AgentBrook/tree/main/publish)下运行：docker-compose up --build
-* 账号：**admin**，密码：**1q2w3e**
+* * *
+**💡开启AgentBrook之旅**
+1. **准备工作**: 根据部署环境选择发布版本类型，运行发布后的文件即可。可以查阅具体[`帮助文档`](https://agentbrook.com/docs/examples/index.html)
+2. **必要条件**
+    * **数据库**：系统默认使用了MySQL:8，Postgres:16.6+pgvector，Redis:5.0.10，可以修改项目appsettings.json文件的DbConnectionStrings。
+    可能看到DbConnectionStrings你会吓一跳，怎么会有那么多数据库，在意的话可以把MySQL的数据库合并到一起。其它参数根据自己实际情况修改调整即可。
+    * **大模型**：因为使用的是Semantic Kernel，极大程度方便了大模型接入，理论上支持各类兼容OpenAI接口的大模型。
+    * **账号密码**：使用[**`SQL`**](https://github.com/ChenGan88/ZSN.AgentBrook/tree/main/DB_SQL/mysql)建库会自动添加好一个管理员账号：**`admin`**，密码：**`1q2w3e`**
+
+**🐳 Docker**
+**Docker Compose**
+
+1. 进入 [`publish`](https://github.com/ChenGan88/ZSN.AgentBrook/tree/main/publish)文件夹
+2. 运行 `docker-compose up --build`
+3. 打开 [http://localhost:5002](http://localhost:5002)
+4. 账号：**`admin`**，密码：**`1q2w3e`**
+5. 可以通过 `docker compose stop` 停止容器
 
 **📦 使用说明**
-1. **系统部署**: 根据部署环境选择发布版本类型，运行发布后的文件即可。
-2. **系统操作**: 登录系统后，可以通过系统提供的各个模块进行功能配置和使用，例如：
+1. **系统操作**: 登录系统后，可以通过系统提供的各个模块进行功能配置和使用，例如：
     * **字典管理**: 维护系统开发使用的数据字典。
     * **系统菜单管理**: 管理系统菜单的映射关系。
     * **系统用户管理**: 管理系统账号和权限。
@@ -45,17 +59,12 @@ AgentBrook 是一款面向 AI 应用软件开发者的快速开发框架系统�
 ![Chat效果](https://github.com/ChenGan88/ZSN.AgentBrook/blob/main/README/pic_003.png)
 
 ***
-**💡开启AgentBrook之旅**
-1. **准备工作**
-    * **数据库**：系统默认使用了MySQL:8，Postgres:16.6+pgvector，Redis:5.0.10，可以修改项目appsettings.json文件的DbConnectionStrings。
-    可能看到DbConnectionStrings你会吓一跳，怎么会有那么多数据库，在意的话可以把MySQL的数据库合并到一起。其它参数根据自己实际情况修改调整即可。
-    * **大模型**：应为使用的是Semantic Kernel，极大程度方便了大模型接入，理论上支持各类兼容OpenAI接口的大模型。
-    * **账号密码**：使用SQL建库会自动添加好一个管理员账号：admin，密码：1q2w3e
 
 **💕 感谢**
 
-    感谢[Semantic Kernel](https://github.com/microsoft/semantic-kernel),提供了一个强大好用的框架。
-    感谢[AntSK](https://github.com/AIDotNet/AntSK)，项目初期学习参考了AntSK对Semantic Kernel的使用。
+   感谢[**Semantic Kernel**](https://github.com/microsoft/semantic-kernel),提供了一个强大好用的框架。
+   
+   感谢[**AntSK**](https://github.com/AIDotNet/AntSK)，项目初期学习参考了AntSK对Semantic Kernel的使用。
 
 
 **🌟 加入我们**
