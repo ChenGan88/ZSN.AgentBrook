@@ -63,6 +63,7 @@ AgentBrook 是一款面向 AI 应用软件开发者的快速开发框架系统�
 **💕 感谢**
 
    感谢[**Semantic Kernel**](https://github.com/microsoft/semantic-kernel),提供了一个强大好用的框架。
+   
    感谢[**AntSK**](https://github.com/AIDotNet/AntSK)，项目初期学习参考了AntSK对Semantic Kernel的使用。
 
 
