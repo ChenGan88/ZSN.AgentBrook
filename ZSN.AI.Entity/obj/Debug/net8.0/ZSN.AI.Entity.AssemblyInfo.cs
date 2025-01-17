@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZSN.AI.Entity")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+208d6b382ec8def067afe017118ee673dd05bbc8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c05838be401ddf9571aa557735d8adb661e8581")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZSN.AI.Entity")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZSN.AI.Entity")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

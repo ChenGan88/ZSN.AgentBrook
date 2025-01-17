@@ -3,3 +3,6 @@ build_property.RootNamespace = LitJSON
 build_property.ProjectDir = W:\AI\ZSN.AI.Community\LitJSON\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 
