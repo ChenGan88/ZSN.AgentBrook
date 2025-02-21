@@ -74,6 +74,7 @@ namespace ZSN.AgentBrook.Web.Manage.Areas.Manage.Controllers
         [HttpPost]
         public JsonMsg<string> UserSave(UserInfo User)
         {
+            string _pwd = hashEncrypt.MD5System("12345678");
             if (User.UserID<=0)
             {
                 UserInfo _User = UserInfoBussiness.GetModel(User.UName);
@@ -84,8 +85,13 @@ namespace ZSN.AgentBrook.Web.Manage.Areas.Manage.Controllers
                 else
                 {
                     User.UAppendTime = DateTime.Now;
-                    User.UPWD = hashEncrypt.MD5System(hashEncrypt.MD5System("12345678"));
+                    User.UPWD = _pwd;
                     UserInfoBussiness.Add(User);
+
+                    _User = UserInfoBussiness.GetModel(User.UName);
+                    _User.UPWD =  UserInfoBussiness.GetUserEncryptionPassword(_User.UserID.ToString(), _pwd);
+
+                    UserInfoBussiness.UpdatePassword(_User);
                 }
             }
             else
