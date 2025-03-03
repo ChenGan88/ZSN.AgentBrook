@@ -86,12 +86,17 @@ namespace ZSN.AgentBrook.Web.Manage.Areas.Manage.Controllers
                 {
                     User.UAppendTime = DateTime.Now;
                     User.UPWD = _pwd;
-                    UserInfoBussiness.Add(User);
+                    User.UserID = UserInfoBussiness.Add(User);
+                    if (User.UserID > 0)
+                    {
+                        User.UPWD = UserInfoBussiness.GetUserEncryptionPassword(User.UserID.ToString(), _pwd);
 
-                    _User = UserInfoBussiness.GetModel(User.UName);
-                    _User.UPWD =  UserInfoBussiness.GetUserEncryptionPassword(_User.UserID.ToString(), _pwd);
-
-                    UserInfoBussiness.UpdatePassword(_User);
+                        UserInfoBussiness.UpdatePassword(_User);
+                    }
+                    else
+                    {
+                        return JsonMsg<string>.Error("创建失败。", ErrorCode.ServerError);
+                    }
                 }
             }
             else
