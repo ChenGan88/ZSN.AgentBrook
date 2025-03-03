@@ -95,7 +95,7 @@
                 , jump: function (obj, f) {
                     if (f)
                         return;
-                    location.href = "@Url.Action("filelist")?KnowledgeBaseID=@ViewBag.KnowledgeBaseID&index=" + obj.curr + "&size=" + obj.limit + "&appid=@HttpContextHelper.Request.GetParam("appid")";
+                    location.href = "@Url.Action("filelist")?KnowledgeBaseID=@ViewBag.KnowledgeBaseID&index=" + obj.curr + "&size=" + obj.limit;
                 }
             });
 

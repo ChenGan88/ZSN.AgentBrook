@@ -102,7 +102,7 @@ namespace ZSN.AgentBrook.Web.Manage.Areas.Manage.Controllers
                 ViewBag.Total = total;
                 ViewBag.FileID = FileID;
                 ViewBag.KnowledgeBaseID = KnowledgeBaseID;
-                ViewBag.KnowledgeBaseFileList = KnowledgeBaseFileChunkList;
+                ViewBag.KnowledgeBaseFileChunkList = KnowledgeBaseFileChunkList;
                 return View();
             }
             else

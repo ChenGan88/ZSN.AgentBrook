@@ -4944,7 +4944,7 @@
       "LitJSON/1.0.0": {
         "runtime": {
           "LitJSON.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },
@@ -4960,7 +4960,7 @@
         },
         "runtime": {
           "ZSN.AI.BLL.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },
@@ -4991,7 +4991,7 @@
         },
         "runtime": {
           "ZSN.AI.Core.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },
@@ -5008,7 +5008,7 @@
         },
         "runtime": {
           "ZSN.AI.DAL.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },
@@ -5024,7 +5024,7 @@
         },
         "runtime": {
           "ZSN.AI.DAL.MySql.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },
@@ -5039,7 +5039,7 @@
         },
         "runtime": {
           "ZSN.AI.DAL.Postgres.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },
@@ -5053,7 +5053,7 @@
         },
         "runtime": {
           "ZSN.AI.Entity.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },
@@ -5069,7 +5069,7 @@
         },
         "runtime": {
           "ZSN.AI.Node.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },
@@ -5085,7 +5085,7 @@
         },
         "runtime": {
           "ZSN.AI.Plugins.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },
@@ -5105,7 +5105,7 @@
         },
         "runtime": {
           "ZSN.AI.Service.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },
@@ -5137,7 +5137,7 @@
         },
         "runtime": {
           "ZSN.Utils.Core.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         },
